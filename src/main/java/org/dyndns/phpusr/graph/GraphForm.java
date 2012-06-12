@@ -16,6 +16,8 @@ public class GraphForm {
     private JButton btnAdd;
     private JPanel pnlMain;
     private JPanel pnlGraph;
+    private JButton btnEncode;
+    private JButton btnExit;
     private GraphUtil util;
 
     public GraphForm(GraphUtil graphUtil) {
@@ -24,7 +26,16 @@ public class GraphForm {
         btnAdd.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 util.addVertex();
-                util.getDist();
+            }
+        });
+        btnEncode.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                util.getEncodeGraph();
+            }
+        });
+        btnExit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                util.exit();
             }
         });
     }
@@ -36,13 +47,9 @@ public class GraphForm {
         return INSTANCE.pnlMain;
     }
 
-    public JPanel getPnlMain() {
-        return pnlMain;
-    }
-
     private void createUIComponents() {
         pnlGraph = new JPanel(new BorderLayout());
-        pnlGraph.setSize(800, 600);
+        pnlGraph.setSize(Const.FRAME_WIDTH, Const.FRAME_HEIGHT);
         pnlGraph.add(util.getGraphComponent());
     }
 }
