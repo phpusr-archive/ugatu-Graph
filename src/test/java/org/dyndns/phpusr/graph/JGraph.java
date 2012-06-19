@@ -21,22 +21,19 @@ public class JGraph extends JFrame {
 
     }
 
-    public JGraph()
-    {
+    private JGraph() {
         super("HabraGraph");
 
         mxGraph graph = new mxGraph();
         Object parent = graph.getDefaultParent();
 
         graph.getModel().beginUpdate();
-        try
-        {
+        try {
             Object v1 = graph.insertVertex(parent, null, "Habra", 20, 20, 80, 30);
             Object v2 = graph.insertVertex(parent, null, "Habr", 240, 150, 80, 30);
             graph.insertEdge(parent, null, "Дуга", v1, v2);
         }
-        finally
-        {
+        finally {
             graph.getModel().endUpdate();
         }
 

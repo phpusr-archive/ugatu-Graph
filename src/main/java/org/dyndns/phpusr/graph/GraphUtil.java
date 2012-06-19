@@ -30,12 +30,12 @@ import java.util.Set;
 
 public class GraphUtil {
 
-    private mxGraph graph;
+    private final mxGraph graph;
     private Object parent;
-    private mxGraphComponent graphComponent;
-    private JFrame frame;
+    private final mxGraphComponent graphComponent;
+    private final JFrame frame;
     private int countVertex = 0;
-    private Logger logger;
+    private final Logger logger;
 
 
     public GraphUtil(GraphEditor frame) {
@@ -311,14 +311,14 @@ public class GraphUtil {
         mxGdDocument document = new mxGdDocument();
         document.parse(mxUtils.readFile(file.getAbsolutePath()));
         openGD(file, document);
+        countVertex = 0;
     }
 
     /**
-     * @throws IOException
+     * @throws IOException Ошибка
      *
      */
-    protected void openGD(File file,
-                          mxGdDocument document) {
+    private void openGD(File file, mxGdDocument document) {
 
         // Replaces file extension with .mxe
         String filename = file.getName();
@@ -345,6 +345,7 @@ public class GraphUtil {
         if (JOptionPane.showConfirmDialog(getGraphComponent(), mxResources.get("loseChanges")) == JOptionPane.YES_OPTION) {
             ((mxGraphModel) graph.getModel()).clear();
             parent = graph.getDefaultParent();
+            countVertex = 0;
         }
     }
 
