@@ -25,10 +25,13 @@ public class GraphForm {
     private JButton btnExit;
     private JButton btnSave;
     private JButton btnOpen;
+    private JButton btnNew;
+    private JButton btnDelete;
     private GraphUtil util;
 
     public GraphForm(GraphUtil graphUtil) {
         this.util = graphUtil;
+        localizeForm();
 
         btnAdd.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -69,8 +72,7 @@ public class GraphForm {
                         //Проверка на существование файла
                         if (new File(filename).exists()
                                 && JOptionPane.showConfirmDialog(util.getGraphComponent(),
-                                mxResources.get("overwriteExistingFile")) != JOptionPane.YES_OPTION)
-                        {
+                                mxResources.get("overwriteExistingFile")) != JOptionPane.YES_OPTION) {
                             return;
                         }
 
@@ -105,6 +107,29 @@ public class GraphForm {
                 }
             }
         });
+        btnNew.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                util.clear();
+            }
+        });
+        btnDelete.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                util.deleteCell();
+            }
+        });
+    }
+
+    /**
+     * Локализация компонентов формы
+     */
+    private void localizeForm() {
+        btnNew.setText(mxResources.get("new"));
+        btnOpen.setText(mxResources.get("openFile"));
+        btnSave.setText(mxResources.get("saveFile"));
+        btnAdd.setText(mxResources.get("add"));
+        btnDelete.setText(mxResources.get("delete"));
+        btnEncode.setText(mxResources.get("encode"));
+        btnExit.setText(mxResources.get("exit"));
     }
 
     public synchronized static JPanel getInstance(GraphUtil util){

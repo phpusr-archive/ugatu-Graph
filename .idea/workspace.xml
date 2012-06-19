@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="48381227-8d37-4cbf-977a-6adc35b004e3" name="Default" comment="Добавил поиск радиуса, диаметра, центра, &#10;сохранение в файл, &#10;файлы локализации.">
+    <list default="true" id="48381227-8d37-4cbf-977a-6adc35b004e3" name="Default" comment="Загрузка графа из файла">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/Const.java" afterPath="$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/Const.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/GraphForm.form" afterPath="$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/GraphForm.form" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/GraphForm.java" afterPath="$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/GraphForm.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/GraphUtil.java" afterPath="$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/GraphUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/Main.java" afterPath="$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/org/dyndns/phpusr/graph/editor.properties" afterPath="$PROJECT_DIR$/src/main/resources/org/dyndns/phpusr/graph/editor.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/org/dyndns/phpusr/graph/editor_ru.properties" afterPath="$PROJECT_DIR$/src/main/resources/org/dyndns/phpusr/graph/editor_ru.properties" />
     </list>
     <ignored path="Graph.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -74,33 +74,25 @@
       <file leaf-file-name="GraphForm.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/GraphForm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="61" selection-start="1588" selection-end="1588" vertical-scroll-proportion="0.0">
+            <state line="53" column="80" selection-start="1547" selection-end="1547" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#760#897#0" expanded="true" />
-                <element signature="e#886#887#0" expanded="true" />
-                <element signature="e#936#1078#0" expanded="true" />
-                <element signature="e#1067#1068#0" expanded="true" />
-                <element signature="e#1115#1247#0" expanded="true" />
-                <element signature="e#1236#1237#0" expanded="true" />
-                <element signature="e#1284#3129#0" expanded="true" />
-                <element signature="e#3118#3119#0" expanded="true" />
-                <element signature="e#3166#4134#0" expanded="true" />
-                <element signature="e#4123#4124#0" expanded="true" />
+                <element signature="e#841#978#0" expanded="true" />
+                <element signature="e#967#968#0" expanded="true" />
+                <element signature="e#1017#1159#0" expanded="true" />
+                <element signature="e#1148#1149#0" expanded="true" />
+                <element signature="e#1196#1328#0" expanded="true" />
+                <element signature="e#1317#1318#0" expanded="true" />
+                <element signature="e#1365#3269#0" expanded="true" />
+                <element signature="e#3258#3259#0" expanded="true" />
+                <element signature="e#3306#4274#0" expanded="true" />
+                <element signature="e#4263#4264#0" expanded="true" />
+                <element signature="e#4310#4443#0" expanded="true" />
+                <element signature="e#4432#4433#0" expanded="true" />
+                <element signature="e#4723#4861#0" expanded="true" />
+                <element signature="e#4850#4851#0" expanded="true" />
               </folding>
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="editor.properties" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/org/dyndns/phpusr/graph/editor.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="13" selection-start="74" selection-end="74" vertical-scroll-proportion="-1.7">
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="ResourceBundle">
-            <state />
           </provider>
         </entry>
       </file>
@@ -111,25 +103,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/Main.java">
+      <file leaf-file-name="GraphUtil.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/GraphUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="11" selection-start="623" selection-end="623" vertical-scroll-proportion="0.265625">
-              <folding />
+            <state line="344" column="53" selection-start="10968" selection-end="10968" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1186#1405#0" expanded="true" />
+                <element signature="e#1394#1395#0" expanded="true" />
+                <element signature="e#1453#1787#0" expanded="true" />
+                <element signature="e#1776#1777#0" expanded="true" />
+                <element signature="e#2978#2986#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GraphUtil.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/GraphUtil.java">
+      <file leaf-file-name="Main.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="62" column="38" selection-start="1627" selection-end="1627" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#969#1188#0" expanded="true" />
-                <element signature="e#1177#1178#0" expanded="true" />
-                <element signature="e#2105#2113#0" expanded="true" />
-              </folding>
+            <state line="44" column="51" selection-start="909" selection-end="909" vertical-scroll-proportion="0.8002296">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -157,13 +151,13 @@
         <option value="$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/GraphUtil.groovy" />
         <option value="$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/DefaultFileFilter.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/resources/editor.properties" />
-        <option value="$PROJECT_DIR$/src/main/resources/org/dyndns/phpusr/graph/editor_ru.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/GraphForm.form" />
         <option value="$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/Main.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/GraphForm.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/Const.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/org/dyndns/phpusr/graph/editor.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/GraphForm.form" />
+        <option value="$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/GraphForm.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/GraphUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/org/dyndns/phpusr/graph/editor.properties" />
+        <option value="$PROJECT_DIR$/src/main/resources/org/dyndns/phpusr/graph/editor_ru.properties" />
       </list>
     </option>
   </component>
@@ -534,7 +528,7 @@
     </option>
   </component>
   <component name="StructureViewFactory">
-    <option name="ACTIVE_ACTIONS" value="SHOW_PROPERTIES" />
+    <option name="ACTIVE_ACTIONS" value="SHOW_NON_PUBLIC,SHOW_PROPERTIES,SHOW_FIELDS" />
   </component>
   <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false">
     <option name="USER" value="" />
@@ -576,7 +570,11 @@
       <created>1340102334149</created>
       <updated>1340102334149</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Загрузка графа из файла">
+      <created>1340106848226</created>
+      <updated>1340106848226</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -603,7 +601,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15795091" sideWeight="0.6707589" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15795091" sideWeight="0.19419643" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924107" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -618,11 +616,11 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20424107" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924107" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.29464287" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24893162" sideWeight="0.32700893" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32959402" sideWeight="0.6707589" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39957264" sideWeight="0.6707589" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24893162" sideWeight="0.6707589" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32924107" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24893162" sideWeight="0.6651786" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924107" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -666,7 +664,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавил поиск радиуса, диаметра, центра, &#10;сохранение в файл, &#10;файлы локализации." />
+    <option name="LAST_COMMIT_MESSAGE" value="Загрузка графа из файла" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -683,6 +681,7 @@
     <MESSAGE value="При добавлении грани между вершинами, на грани появляется ее длина" />
     <MESSAGE value="Удалил библиотеки от jung" />
     <MESSAGE value="Добавил поиск радиуса, диаметра, центра, &#10;сохранение в файл, &#10;файлы локализации." />
+    <MESSAGE value="Загрузка графа из файла" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -692,69 +691,72 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://G:/Distr/Programming/Java/Graph/jgraphx-1_10_0_6/jgraphx/src/com/mxgraph/model/mxCell.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.6.0_25/src.zip!/java/awt/event/ActionListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="13" selection-start="1290" selection-end="1290" vertical-scroll-proportion="0.33333334" />
+        <state line="32" column="0" selection-start="928" selection-end="928" vertical-scroll-proportion="0.734375">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.6.0_25/src.zip!/java/awt/List.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.6.0_25/src.zip!/javax/swing/Action.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+        <state line="197" column="17" selection-start="9525" selection-end="9525" vertical-scroll-proportion="0.33333334">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://G:/Distr/Programming/Java/Graph/jgraphx-1_10_0_6/jgraphx/src/com/mxgraph/swing/util/mxGraphActions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="147" column="21" selection-start="2497" selection-end="2497" vertical-scroll-proportion="0.7760417">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.6.0_25/src.zip!/java/awt/Component.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5442" column="29" selection-start="196130" selection-end="196130" vertical-scroll-proportion="0.33333334">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.6.0_25/src.zip!/java/util/EventListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="17" selection-start="298" selection-end="298" vertical-scroll-proportion="0.2361111">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.6.0_25/src.zip!/java/awt/event/MouseMotionListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="52" selection-start="1361" selection-end="1361" vertical-scroll-proportion="0.33333334">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.6.0_25/src.zip!/java/awt/event/MouseListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="17" selection-start="1419" selection-end="1419" vertical-scroll-proportion="0.067708336">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.6.0_25/src.zip!/java/awt/event/MouseAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="48" selection-start="2004" selection-end="2004" vertical-scroll-proportion="1.1180556">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://G:/Distr/Programming/Java/Graph/jgraphx-1_10_0_6/jgraphx/src/com/mxgraph/model/mxGraphModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1797" column="24" selection-start="44329" selection-end="44329" vertical-scroll-proportion="0.33333334" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/DefaultFileFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="13" selection-start="485" selection-end="485" vertical-scroll-proportion="0.2361111">
+        <state line="1071" column="16" selection-start="25497" selection-end="25497" vertical-scroll-proportion="0.421875">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://G:/Distr/Programming/Java/Graph/jgraphx-1_10_0_6/jgraphx/src/com/mxgraph/util/mxResources.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.6.0_25/src.zip!/java/awt/event/ActionEvent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="13" selection-start="349" selection-end="349" vertical-scroll-proportion="0.14756945">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://G:/Distr/Programming/Java/Graph/jgraphx-1_10_0_6/jgraphx/src/com/mxgraph/util/mxUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1807" column="23" selection-start="48555" selection-end="48555" vertical-scroll-proportion="0.33333334">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/dyndns/phpusr/graph/Test.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/org/dyndns/phpusr/graph/editor_ru.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="30" selection-start="30" selection-end="30" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="ResourceBundle">
-        <state />
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.6.0_25/src.zip!/java/net/URLClassLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="201" column="0" selection-start="7685" selection-end="7685" vertical-scroll-proportion="0.6875">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/Const.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="75" selection-start="196" selection-end="196" vertical-scroll-proportion="0.1736111">
+        <state line="37" column="18" selection-start="1348" selection-end="1348" vertical-scroll-proportion="0.8055556">
           <folding />
         </state>
       </provider>
@@ -764,9 +766,32 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/org/dyndns/phpusr/graph/editor.properties">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/GraphForm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="13" selection-start="74" selection-end="74" vertical-scroll-proportion="-1.7">
+        <state line="53" column="80" selection-start="1547" selection-end="1547" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#841#978#0" expanded="true" />
+            <element signature="e#967#968#0" expanded="true" />
+            <element signature="e#1017#1159#0" expanded="true" />
+            <element signature="e#1148#1149#0" expanded="true" />
+            <element signature="e#1196#1328#0" expanded="true" />
+            <element signature="e#1317#1318#0" expanded="true" />
+            <element signature="e#1365#3269#0" expanded="true" />
+            <element signature="e#3258#3259#0" expanded="true" />
+            <element signature="e#3306#4274#0" expanded="true" />
+            <element signature="e#4263#4264#0" expanded="true" />
+            <element signature="e#4310#4443#0" expanded="true" />
+            <element signature="e#4432#4433#0" expanded="true" />
+            <element signature="e#4723#4861#0" expanded="true" />
+            <element signature="e#4850#4851#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/org/dyndns/phpusr/graph/editor_ru.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="31" selection-start="196" selection-end="196" vertical-scroll-proportion="0.17978849">
           <folding />
         </state>
       </provider>
@@ -774,47 +799,33 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/GraphForm.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/org/dyndns/phpusr/graph/editor.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="61" selection-start="1588" selection-end="1588" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#760#897#0" expanded="true" />
-            <element signature="e#886#887#0" expanded="true" />
-            <element signature="e#936#1078#0" expanded="true" />
-            <element signature="e#1067#1068#0" expanded="true" />
-            <element signature="e#1115#1247#0" expanded="true" />
-            <element signature="e#1236#1237#0" expanded="true" />
-            <element signature="e#1284#3129#0" expanded="true" />
-            <element signature="e#3118#3119#0" expanded="true" />
-            <element signature="e#3166#4134#0" expanded="true" />
-            <element signature="e#4123#4124#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://G:/Distr/Programming/Java/Graph/jgraphx-1_10_0_6/jgraphx/src/com/mxgraph/io/mxGdCodec.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="39" selection-start="1909" selection-end="1909" vertical-scroll-proportion="0.6510417">
+        <state line="9" column="3" selection-start="141" selection-end="166" vertical-scroll-proportion="0.17978849">
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="ResourceBundle">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/GraphUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="38" selection-start="1627" selection-end="1627" vertical-scroll-proportion="0.0">
+        <state line="344" column="53" selection-start="10968" selection-end="10968" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#969#1188#0" expanded="true" />
-            <element signature="e#1177#1178#0" expanded="true" />
-            <element signature="e#2105#2113#0" expanded="true" />
+            <element signature="e#1186#1405#0" expanded="true" />
+            <element signature="e#1394#1395#0" expanded="true" />
+            <element signature="e#1453#1787#0" expanded="true" />
+            <element signature="e#1776#1777#0" expanded="true" />
+            <element signature="e#2978#2986#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="11" selection-start="623" selection-end="623" vertical-scroll-proportion="0.265625">
+        <state line="44" column="51" selection-start="909" selection-end="909" vertical-scroll-proportion="0.8002296">
           <folding />
         </state>
       </provider>

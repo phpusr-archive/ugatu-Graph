@@ -6,10 +6,14 @@ import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGeometry;
 import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.swing.util.mxGraphActions;
 import com.mxgraph.util.*;
 import com.mxgraph.view.mxGraph;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
@@ -36,9 +40,11 @@ public class GraphUtil {
         this.frame = frame;
 
         graph = new mxGraph();
+        customGraph(graph);
         parent = graph.getDefaultParent();
 
         graphComponent = new mxGraphComponent(graph);
+
         graph.getModel().addListener(mxEvent.CHANGE, new mxEventSource.mxIEventListener() {
             public void invoke(Object sender, mxEventObject evt) {
                 if (debug > 0) System.out.println("CHANGE");
@@ -56,7 +62,29 @@ public class GraphUtil {
                 graph.refresh();
             }
         });
+        getGraphComponent().getGraphControl().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                mouseReleased(e);
+            }
 
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if (e.isPopupTrigger()) {
+                    if (debug > 0) System.out.println("Delete object");
+                    deleteCell();
+                }
+            }
+        });
+
+    }
+
+    /**
+     * Включение и отключение опций графа
+     * @param graph Граф
+     */
+    private void customGraph(mxGraph graph) {
+        graph.setAllowDanglingEdges(false);
     }
 
     /**
@@ -211,6 +239,13 @@ public class GraphUtil {
     }
 
     /**
+     * Удаляет вершину или грань графа
+     */
+    public void deleteCell() {
+        mxGraphActions.getDeleteAction().actionPerformed(new ActionEvent(getGraphComponent(), 0, ""));
+    }
+
+    /**
      * Возвращает длину грани
      * @param cell Грань
      * @return Длина грани
@@ -261,12 +296,8 @@ public class GraphUtil {
      * @throws IOException
      */
     public void saveToFile(String filename) throws IOException {
-
-            String content = mxGdCodec.encode(graph)
-                    .getDocumentString();
-
-            mxUtils.writeFile(content, filename);
-
+        String content = mxGdCodec.encode(graph).getDocumentString();
+        mxUtils.writeFile(content, filename);
     }
 
     /**
@@ -305,6 +336,19 @@ public class GraphUtil {
         onChange();
     }
 
+    /**
+     * Очистка графа
+     */
+    public void clear() {
+        if (JOptionPane.showConfirmDialog(getGraphComponent(), mxResources.get("loseChanges")) == JOptionPane.YES_OPTION) {
+            ((mxGraphModel) graph.getModel()).clear();
+            parent = graph.getDefaultParent();
+        }
+    }
+
+    /**
+     * Выход
+     */
     public void exit() {
         frame.dispose();
     }
