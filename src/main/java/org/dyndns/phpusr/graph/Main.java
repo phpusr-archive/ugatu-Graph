@@ -31,8 +31,7 @@ class GraphEditor extends JFrame {
     /**
      * Adds required resources for i18n
      */
-    static
-    {
+    static {
         try {
             mxResources.add("org/dyndns/phpusr/graph/editor");
         }

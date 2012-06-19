@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
 /**
  * @author phpusr
@@ -23,6 +24,7 @@ public class GraphForm {
     private JButton btnEncode;
     private JButton btnExit;
     private JButton btnSave;
+    private JButton btnOpen;
     private GraphUtil util;
 
     public GraphForm(GraphUtil graphUtil) {
@@ -47,9 +49,9 @@ public class GraphForm {
             public void actionPerformed(ActionEvent e) {
                 try {
                     JFileChooser fc = new JFileChooser();
-                    fc.addChoosableFileFilter(new DefaultFileFilter(".txt",
-                            "Graph Drawing file (.txt)"));
-                    int rc = fc.showDialog(null, "Save");
+                    fc.addChoosableFileFilter(new DefaultFileFilter(Const.EXT_DEF,
+                            Const.CHOOSE_FILE_FILTER_DESCRIP));
+                    int rc = fc.showDialog(null, mxResources.get("saveFile"));
 
                     if (rc == JFileChooser.APPROVE_OPTION) {
                         String filename = fc.getSelectedFile().getAbsolutePath();
@@ -59,7 +61,6 @@ public class GraphForm {
                         if (selectedFilter instanceof DefaultFileFilter) {
                             String ext = ((DefaultFileFilter) selectedFilter)
                                     .getExtension();
-
                             if (!filename.toLowerCase().endsWith(ext)) {
                                 filename += ext;
                             }
@@ -74,13 +75,33 @@ public class GraphForm {
                         }
 
                         util.saveToFile(filename);
-
                     }
                 } catch (Throwable ex) {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(util.getGraphComponent(),
                             ex.toString(), mxResources.get("error"),
                             JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        btnOpen.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fc = new JFileChooser();
+                fc.addChoosableFileFilter(new DefaultFileFilter(Const.EXT_DEF,
+                        Const.CHOOSE_FILE_FILTER_DESCRIP));
+                int rc = fc.showDialog(null, mxResources.get("openFile"));
+                if (rc == JFileChooser.APPROVE_OPTION) {
+                    try {
+                        File file = fc.getSelectedFile();
+                        util.openFile(file);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(
+                                util.getGraphComponent(),
+                                ex.toString(),
+                                mxResources.get("error"),
+                                JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         });

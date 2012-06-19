@@ -1,13 +1,16 @@
 package org.dyndns.phpusr.graph;
 
+import com.mxgraph.io.gd.mxGdDocument;
 import com.mxgraph.io.mxGdCodec;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGeometry;
+import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.*;
 import com.mxgraph.view.mxGraph;
 
 import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -40,15 +43,7 @@ public class GraphUtil {
             public void invoke(Object sender, mxEventObject evt) {
                 if (debug > 0) System.out.println("CHANGE");
 
-                changeEdgeTitles();
-                //Сброс стиля для веришн
-                resetStyleCells(graph.getChildVertices(graph.getDefaultParent()));
-                //Сброс стиля для граней
-                resetStyleCells(graph.getChildEdges(graph.getDefaultParent()));
-
-                task();
-
-                graph.refresh();
+                onChange();
             }
         });
         graph.addListener(mxEvent.ADD_CELLS, new mxEventSource.mxIEventListener() {
@@ -65,12 +60,27 @@ public class GraphUtil {
     }
 
     /**
+     * Запускается при изменении графа
+     */
+    private void onChange() {
+        changeEdgeTitles();
+        //Сброс стиля для веришн
+        resetStyleCells(graph.getChildVertices(parent));
+        //Сброс стиля для граней
+        resetStyleCells(graph.getChildEdges(parent));
+
+        task();
+
+        graph.refresh();
+    }
+
+    /**
      * Найходит расстояния в графе: диаметр, центр, радиус графа
      */
     private void task() {
         mxCell diametr, radius;
         Set<mxCell> maxEdgeList = new HashSet<mxCell>();
-        final Object[] vertices = graph.getChildVertices(graph.getDefaultParent());
+        final Object[] vertices = graph.getChildVertices(parent);
 
         if (vertices.length > 0) {
             System.out.println("\n\n========= Vertices =========");
@@ -164,11 +174,11 @@ public class GraphUtil {
      */
     private void resetStyleCells(Object[] objects) {
 
-        graph.setCellStyles(mxConstants.STYLE_FONTSIZE, Const.FONT_SIZE_STD, objects);
-        graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, mxUtils.hexString(Const.STROKECOLOR_STD), objects);
-        graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, mxUtils.hexString(Const.FILLCOLOR_STD), objects);
-        graph.setCellStyles(mxConstants.STYLE_FONTCOLOR, mxUtils.hexString(Const.FONTCOLOR_STD), objects);
-        graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, Const.STROKEWIDTH_STD, objects);
+        graph.setCellStyles(mxConstants.STYLE_FONTSIZE, Const.FONT_SIZE_DEF, objects);
+        graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, mxUtils.hexString(Const.STROKECOLOR_DEF), objects);
+        graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, mxUtils.hexString(Const.FILLCOLOR_DEF), objects);
+        graph.setCellStyles(mxConstants.STYLE_FONTCOLOR, mxUtils.hexString(Const.FONTCOLOR_DEF), objects);
+        graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, Const.STROKEWIDTH_DEF, objects);
 
     }
 
@@ -176,7 +186,7 @@ public class GraphUtil {
      * Показывает длину грани на ее заголовке
      */
     private void changeEdgeTitles() {
-        final Object[] edges = graph.getChildEdges(graph.getDefaultParent());
+        final Object[] edges = graph.getChildEdges(parent);
 
         for (Object edge : edges) {
             mxCell cell = (mxCell) edge;
@@ -245,6 +255,11 @@ public class GraphUtil {
         System.out.println("Encode:\n" + content);
     }
 
+    /**
+     * Сохраняет граф в файл
+     * @param filename Имя файла с графом
+     * @throws IOException
+     */
     public void saveToFile(String filename) throws IOException {
 
             String content = mxGdCodec.encode(graph)
@@ -254,9 +269,44 @@ public class GraphUtil {
 
     }
 
+    /**
+     * Открывает граф из файла
+     * @param file Файл с графом
+     * @throws IOException
+     */
+    public void openFile(File file) throws IOException {
+        mxGdDocument document = new mxGdDocument();
+        document.parse(mxUtils.readFile(file.getAbsolutePath()));
+        openGD(file, document);
+    }
+
+    /**
+     * @throws IOException
+     *
+     */
+    protected void openGD(File file,
+                          mxGdDocument document) {
+
+        // Replaces file extension with .mxe
+        String filename = file.getName();
+        filename = filename.substring(0, filename.length() - 4) + ".mxe";
+
+        if (new File(filename).exists()
+                && JOptionPane.showConfirmDialog(getGraphComponent(),
+                mxResources.get("overwriteExistingFile")) != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        ((mxGraphModel) graph.getModel()).clear();
+        mxGdCodec.decode(document, graph);
+        parent = graph.getDefaultParent();
+        getGraphComponent().zoomAndCenter();
+
+        onChange();
+    }
+
     public void exit() {
         frame.dispose();
     }
 
 }
-
