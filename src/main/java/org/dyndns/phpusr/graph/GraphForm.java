@@ -1,5 +1,6 @@
 package org.dyndns.phpusr.graph;
 
+import com.mxgraph.examples.swing.editor.DefaultFileFilter;
 import com.mxgraph.util.mxResources;
 
 import javax.swing.*;

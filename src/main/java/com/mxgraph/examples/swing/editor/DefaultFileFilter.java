@@ -7,7 +7,7 @@
  * See LICENSE file for license details. If you are unable to locate
  * this file please contact info (at) jgraph (dot) com.
  */
-package org.dyndns.phpusr.graph;
+package com.mxgraph.examples.swing.editor;
 
 import javax.imageio.ImageIO;
 import javax.swing.filechooser.FileFilter;
