@@ -9,6 +9,8 @@ import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.swing.util.mxGraphActions;
 import com.mxgraph.util.*;
 import com.mxgraph.view.mxGraph;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -33,10 +35,11 @@ public class GraphUtil {
     private mxGraphComponent graphComponent;
     private JFrame frame;
     private int countVertex = 0;
-    private int debug = 0;
+    private Logger logger;
 
 
     public GraphUtil(GraphEditor frame) {
+        logger = LoggerFactory.getLogger(GraphUtil.class);
         this.frame = frame;
 
         graph = new mxGraph();
@@ -47,14 +50,13 @@ public class GraphUtil {
 
         graph.getModel().addListener(mxEvent.CHANGE, new mxEventSource.mxIEventListener() {
             public void invoke(Object sender, mxEventObject evt) {
-                if (debug > 0) System.out.println("CHANGE");
-
+                logger.debug("CHANGE");
                 onChange();
             }
         });
         graph.addListener(mxEvent.ADD_CELLS, new mxEventSource.mxIEventListener() {
             public void invoke(Object sender, mxEventObject evt) {
-                if (debug > 0) System.out.println("ADD_CELLS");
+                logger.debug("ADD_CELLS");
 
                 changeEdgeTitles();
                 resetStyleCells((Object[]) evt.getProperty("cells"));
@@ -71,7 +73,7 @@ public class GraphUtil {
             @Override
             public void mouseReleased(MouseEvent e) {
                 if (e.isPopupTrigger()) {
-                    if (debug > 0) System.out.println("Delete object");
+                    logger.debug("Delete object");
                     deleteCell();
                 }
             }
@@ -251,7 +253,7 @@ public class GraphUtil {
      * @return Длина грани
      */
     private Double getDist(mxCell cell) {
-        if (debug > 0) System.out.println("getDist()");
+        logger.debug("getDist()");
 
         if (cell.getSource() != null && cell.getTarget() != null) {
             final mxGeometry sourcePoint = cell.getSource().getGeometry();
