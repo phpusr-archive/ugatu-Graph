@@ -1,9 +1,13 @@
 package org.dyndns.phpusr.graph;
 
+import com.mxgraph.util.mxResources;
+
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 /**
  * @author phpusr
@@ -18,6 +22,7 @@ public class GraphForm {
     private JPanel pnlGraph;
     private JButton btnEncode;
     private JButton btnExit;
+    private JButton btnSave;
     private GraphUtil util;
 
     public GraphForm(GraphUtil graphUtil) {
@@ -36,6 +41,47 @@ public class GraphForm {
         btnExit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 util.exit();
+            }
+        });
+        btnSave.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    JFileChooser fc = new JFileChooser();
+                    fc.addChoosableFileFilter(new DefaultFileFilter(".txt",
+                            "Graph Drawing file (.txt)"));
+                    int rc = fc.showDialog(null, "Save");
+
+                    if (rc == JFileChooser.APPROVE_OPTION) {
+                        String filename = fc.getSelectedFile().getAbsolutePath();
+                        FileFilter selectedFilter = fc.getFileFilter();
+
+                        //Добавление расширения файлу, если нет
+                        if (selectedFilter instanceof DefaultFileFilter) {
+                            String ext = ((DefaultFileFilter) selectedFilter)
+                                    .getExtension();
+
+                            if (!filename.toLowerCase().endsWith(ext)) {
+                                filename += ext;
+                            }
+                        }
+
+                        //Проверка на существование файла
+                        if (new File(filename).exists()
+                                && JOptionPane.showConfirmDialog(util.getGraphComponent(),
+                                mxResources.get("overwriteExistingFile")) != JOptionPane.YES_OPTION)
+                        {
+                            return;
+                        }
+
+                        util.saveToFile(filename);
+
+                    }
+                } catch (Throwable ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(util.getGraphComponent(),
+                            ex.toString(), mxResources.get("error"),
+                            JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }

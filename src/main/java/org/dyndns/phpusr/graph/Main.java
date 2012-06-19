@@ -1,5 +1,7 @@
 package org.dyndns.phpusr.graph;
 
+import com.mxgraph.util.mxResources;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -18,14 +20,28 @@ public class Main {
             e1.printStackTrace();
         }
 
-        MainFrame frame = new MainFrame();
+        GraphEditor frame = new GraphEditor();
         frame.showFrame();
     }
 
 }
 
-class MainFrame extends JFrame {
-    public MainFrame() throws HeadlessException {
+class GraphEditor extends JFrame {
+
+    /**
+     * Adds required resources for i18n
+     */
+    static
+    {
+        try {
+            mxResources.add("org/dyndns/phpusr/graph/editor");
+        }
+        catch (Exception e) {
+            // ignore
+        }
+    }
+
+    public GraphEditor() throws HeadlessException {
         super("JGraph");
         setContentPane(GraphForm.getInstance(new GraphUtil(this)));
         setSize(1000, 600);
