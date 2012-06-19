@@ -110,7 +110,10 @@ public class GraphForm {
         });
         btnNew.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                util.clear();
+                if (JOptionPane.showConfirmDialog(util.getGraphComponent(),
+                        mxResources.get("loseChanges")) == JOptionPane.YES_OPTION) {
+                    util.clear();
+                }
             }
         });
         btnDelete.addActionListener(new ActionListener() {

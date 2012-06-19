@@ -342,11 +342,9 @@ public class GraphUtil {
      * Очистка графа
      */
     public void clear() {
-        if (JOptionPane.showConfirmDialog(getGraphComponent(), mxResources.get("loseChanges")) == JOptionPane.YES_OPTION) {
-            ((mxGraphModel) graph.getModel()).clear();
-            parent = graph.getDefaultParent();
-            countVertex = 0;
-        }
+        ((mxGraphModel) graph.getModel()).clear();
+        parent = graph.getDefaultParent();
+        countVertex = 0;
     }
 
     /**
