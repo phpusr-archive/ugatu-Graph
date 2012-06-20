@@ -28,6 +28,7 @@ public class GraphForm {
     private JButton btnOpen;
     private JButton btnNew;
     private JButton btnDelete;
+    private JButton btnAbout;
     private GraphUtil util;
 
     public GraphForm(GraphUtil graphUtil) {
@@ -121,6 +122,16 @@ public class GraphForm {
                 util.deleteCell();
             }
         });
+        btnAbout.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(util.getGraphComponent(),
+                        mxResources.get("about.description"),
+                        mxResources.get("about"),
+                        JOptionPane.QUESTION_MESSAGE,
+                        new ImageIcon(GraphForm.class.getResource("images/phpusr.png"))
+                );
+            }
+        });
     }
 
     /**
@@ -134,6 +145,7 @@ public class GraphForm {
         btnDelete.setText(mxResources.get("delete"));
         btnEncode.setText(mxResources.get("encode"));
         btnExit.setText(mxResources.get("exit"));
+        btnAbout.setText(mxResources.get("about"));
     }
 
     /**
