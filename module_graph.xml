@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_graph" default="compile.module.graph">
+  <dirname property="module.graph.basedir" file="${ant.file.module_graph}"/>
+  
+  <property name="module.jdk.home.graph" value="${jdk.home.1.6}"/>
+  <property name="module.jdk.bin.graph" value="${jdk.bin.1.6}"/>
+  <property name="module.jdk.classpath.graph" value="jdk.classpath.1.6"/>
+  
+  <property name="compiler.args.graph" value="${compiler.args}"/>
+  
+  <property name="graph.output.dir" value="${module.graph.basedir}/out/production/Graph"/>
+  <property name="graph.testoutput.dir" value="${module.graph.basedir}/out/test/Graph"/>
+  
+  <path id="graph.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="graph.module.production.classpath">
+    <path refid="${module.jdk.classpath.graph}"/>
+    <path refid="library.jgraphx.classpath"/>
+    <pathelement location="${basedir}/lib/slf4j-api-1.6.5.jar"/>
+    <pathelement location="${basedir}/lib/logback-classic-1.0.6.jar"/>
+    <pathelement location="${basedir}/lib/logback-core-1.0.6.jar"/>
+  </path>
+  
+  <path id="graph.runtime.production.module.classpath">
+    <pathelement location="${graph.output.dir}"/>
+    <path refid="library.jgraphx.classpath"/>
+    <pathelement location="${basedir}/lib/slf4j-api-1.6.5.jar"/>
+    <pathelement location="${basedir}/lib/logback-classic-1.0.6.jar"/>
+    <pathelement location="${basedir}/lib/logback-core-1.0.6.jar"/>
+  </path>
+  
+  <path id="graph.module.classpath">
+    <path refid="${module.jdk.classpath.graph}"/>
+    <pathelement location="${graph.output.dir}"/>
+    <path refid="library.jgraphx.classpath"/>
+    <pathelement location="${basedir}/lib/slf4j-api-1.6.5.jar"/>
+    <pathelement location="${basedir}/lib/logback-classic-1.0.6.jar"/>
+    <pathelement location="${basedir}/lib/logback-core-1.0.6.jar"/>
+  </path>
+  
+  <path id="graph.runtime.module.classpath">
+    <pathelement location="${graph.testoutput.dir}"/>
+    <pathelement location="${graph.output.dir}"/>
+    <path refid="library.jgraphx.classpath"/>
+    <pathelement location="${basedir}/lib/slf4j-api-1.6.5.jar"/>
+    <pathelement location="${basedir}/lib/logback-classic-1.0.6.jar"/>
+    <pathelement location="${basedir}/lib/logback-core-1.0.6.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.graph">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.graph">
+    <patternset refid="excluded.from.module.graph"/>
+  </patternset>
+  
+  <path id="graph.module.sourcepath">
+    <dirset dir="${module.graph.basedir}">
+      <include name="src/main/java"/>
+      <include name="src/main/resources"/>
+    </dirset>
+  </path>
+  
+  <path id="graph.module.test.sourcepath">
+    <dirset dir="${module.graph.basedir}">
+      <include name="src/test/java"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.graph" depends="compile.module.graph.production,compile.module.graph.tests" description="Compile module Graph"/>
+  
+  <target name="compile.module.graph.production" depends="register.custom.compilers" description="Compile module Graph; production classes">
+    <mkdir dir="${graph.output.dir}"/>
+    <javac2 destdir="${graph.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.graph}/javac">
+      <compilerarg line="${compiler.args.graph}"/>
+      <bootclasspath refid="graph.module.bootclasspath"/>
+      <classpath refid="graph.module.production.classpath"/>
+      <src refid="graph.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.graph"/>
+    </javac2>
+    
+    <copy todir="${graph.output.dir}">
+      <fileset dir="${module.graph.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.graph.basedir}/src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.graph.tests" depends="register.custom.compilers,compile.module.graph.production" description="compile module Graph; test classes" unless="skip.tests">
+    <mkdir dir="${graph.testoutput.dir}"/>
+    <javac2 destdir="${graph.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.graph}/javac">
+      <compilerarg line="${compiler.args.graph}"/>
+      <bootclasspath refid="graph.module.bootclasspath"/>
+      <classpath refid="graph.module.classpath"/>
+      <src refid="graph.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.graph"/>
+    </javac2>
+    
+    <copy todir="${graph.testoutput.dir}">
+      <fileset dir="${module.graph.basedir}/src/test/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.graph" description="cleanup module">
+    <delete dir="${graph.output.dir}"/>
+    <delete dir="${graph.testoutput.dir}"/>
+  </target>
+</project>
