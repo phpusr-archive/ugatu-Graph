@@ -136,6 +136,11 @@ public class GraphForm {
         btnExit.setText(mxResources.get("exit"));
     }
 
+    /**
+     * Создание или получение экземпляра данного класса
+     * @param util Утилита работа с библиотекой графа
+     * @return Экземпляр данного класса
+     */
     public synchronized static JPanel getInstance(GraphUtil util){
         if ( INSTANCE == null ) {
             INSTANCE = new GraphForm(util);
@@ -143,6 +148,9 @@ public class GraphForm {
         return INSTANCE.pnlMain;
     }
 
+    /**
+     * Ручное создание компонентов формы
+     */
     private void createUIComponents() {
         pnlGraph = new JPanel(new BorderLayout());
         pnlGraph.setSize(Const.FRAME_WIDTH, Const.FRAME_HEIGHT);

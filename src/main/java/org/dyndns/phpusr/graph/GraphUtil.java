@@ -105,7 +105,7 @@ public class GraphUtil {
     }
 
     /**
-     * Найходит расстояния в графе: диаметр, центр, радиус графа
+     * Находит расстояния в графе: диаметр, центр, радиус графа
      */
     private void task() {
         mxCell diametr, radius;
@@ -152,7 +152,7 @@ public class GraphUtil {
 
     /**
      * Показывает диаметр на изображении графа
-     * @param diametr диаметр
+     * @param diametr Диаметр
      */
     private void showDiametr(mxCell diametr) {
         graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, mxUtils.hexString(Const.STROKECOLOR_DIAMETR), new Object[]{diametr});
@@ -160,7 +160,7 @@ public class GraphUtil {
 
     /**
      * Показывает радиус на изображении графа
-     * @param radius радиус
+     * @param radius Радиус
      */
     private void showRadius(mxCell radius) {
         graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, mxUtils.hexString(Const.STROKECOLOR_RADIUS), new Object[]{radius});
@@ -171,7 +171,7 @@ public class GraphUtil {
     }
 
     /**
-     * Находит максимальную по длине грань в передаваеймой вершине
+     * Находит максимальную по длине грань в передаваемой вершине
      * @param cell Вершина
      * @return Максимальная по длине грань
      */
@@ -190,7 +190,7 @@ public class GraphUtil {
                     }
                 }
 
-                System.out.println(cell.getValue() + ": maxEge=" + getDist(maxEdge, 7));
+                System.out.println(cell.getValue() + ": maxEdge=" + getDist(maxEdge, 7));
                 return maxEdge;
             }
         }
