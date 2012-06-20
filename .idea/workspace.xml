@@ -4,10 +4,11 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48381227-8d37-4cbf-977a-6adc35b004e3" name="Default" comment="">
+    <list default="true" id="48381227-8d37-4cbf-977a-6adc35b004e3" name="Default" comment="Правки javadocs">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/Diameter, radius and center of the graph.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/img/image348.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/img/image349.gif" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/GraphForm.java" afterPath="$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/GraphForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/GraphUtil.java" afterPath="$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/GraphUtil.java" />
     </list>
     <ignored path="Graph.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -85,7 +86,7 @@
       <file leaf-file-name="GraphForm.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/GraphForm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="96" column="49" selection-start="3715" selection-end="3715" vertical-scroll-proportion="0.6486797">
+            <state line="129" column="58" selection-start="4926" selection-end="4926" vertical-scroll-proportion="0.76578647">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3285#4253#0" expanded="true" />
@@ -301,6 +302,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Graph" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Graph" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -624,7 +639,11 @@
       <created>1340127050475</created>
       <updated>1340127050475</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Правки javadocs">
+      <created>1340182270108</created>
+      <updated>1340182270108</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -714,7 +733,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавил артифакт сборки в jar,&#10;Удалил библиотеки Groovy" />
+    <option name="LAST_COMMIT_MESSAGE" value="Правки javadocs" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -738,6 +757,7 @@
     <MESSAGE value="Небольшой рефакторинг" />
     <MESSAGE value="Мелкие правки" />
     <MESSAGE value="Добавил артифакт сборки в jar,&#10;Удалил библиотеки Groovy" />
+    <MESSAGE value="Правки javadocs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -856,7 +876,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/dyndns/phpusr/graph/GraphForm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="49" selection-start="3715" selection-end="3715" vertical-scroll-proportion="0.6486797">
+        <state line="129" column="58" selection-start="4926" selection-end="4926" vertical-scroll-proportion="0.76578647">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3285#4253#0" expanded="true" />
