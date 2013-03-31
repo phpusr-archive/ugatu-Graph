@@ -1,0 +1,6 @@
+/out
+/.idea/workspace.xml
+/bin/*.jar
+/bin/*.log
+/bin/*.zip
+*.log
