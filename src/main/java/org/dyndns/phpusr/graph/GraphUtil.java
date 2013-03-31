@@ -3,7 +3,6 @@ package org.dyndns.phpusr.graph;
 import com.mxgraph.io.gd.mxGdDocument;
 import com.mxgraph.io.mxGdCodec;
 import com.mxgraph.model.mxCell;
-import com.mxgraph.model.mxGeometry;
 import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.model.mxICell;
 import com.mxgraph.swing.mxGraphComponent;
@@ -19,7 +18,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
 
 /**
  * 
@@ -37,9 +38,12 @@ public class GraphUtil {
     private int countVertex = 0;
     private final Logger logger;
 
-    /** TODO */
+    /** Стек */
     private Stack<mxICell> stack;
+    /** Список уже используемых вершин */
     private List<mxICell> finshedList;
+    /** Список вершин при обходе Графа */
+    private List<mxICell> graphList;
 
     public GraphUtil(GraphEditor frame) {
         logger = LoggerFactory.getLogger(GraphUtil.class);
@@ -89,7 +93,7 @@ public class GraphUtil {
      * @param graph Граф
      */
     private void customGraph(mxGraph graph) {
-        graph.setAllowDanglingEdges(false);
+        graph.setAllowDanglingEdges(false); //Отключение висячих Граней
     }
 
     /**
@@ -102,17 +106,16 @@ public class GraphUtil {
         //Сброс стиля для граней
         resetStyleCells(graph.getChildEdges(parent));
 
-        //task();
-        asd();
+        task();
 
         graph.refresh();
     }
 
-    /** TODO */
-    private void asd() {
-        System.out.println(">> asd");
+    /** TODO Обход и вывод Графа */
+    private void task() {
         stack = new Stack<mxICell>();
         finshedList = new ArrayList<mxICell>();
+        graphList = new ArrayList<mxICell>();
 
         final Object[] vertices = graph.getChildVertices(parent);
         if (vertices.length > 0) {
@@ -122,14 +125,25 @@ public class GraphUtil {
                 stack.push(cell);
                 while(!stack.empty()) passageGraphDepth();
             }
+
+            printGraphList(graphList);
         }
+    }
+
+    /** Вывод вершин Графа */
+    private void printGraphList(List<mxICell> graphList) {
+        System.out.println(">> Print Graph List");
+        for (mxICell cell : graphList) {
+            System.out.print(cell.getValue() + "; ");
+        }
+        System.out.println("\n");
     }
 
     /** Прохождение Графа в глубь */
     private void passageGraphDepth() {
         mxICell cell = stack.pop();
         if (finshedList.indexOf(cell) == -1) {
-            System.out.println(cell.getValue());
+            graphList.add(cell);
             finshedList.add(cell);
 
             for (int i = 0; i < cell.getEdgeCount(); i++) {
@@ -142,122 +156,26 @@ public class GraphUtil {
     }
 
     /**
-     * Находит расстояния в графе: диаметр, центр, радиус графа
-     */
-    private void task() { //TODO удалить не используемое
-        mxCell diametr, radius;
-        Set<mxCell> maxEdgeList = new HashSet<mxCell>();
-        final Object[] vertices = graph.getChildVertices(parent);
-
-        if (vertices.length > 0) {
-            System.out.println("\n\n========= Vertices =========");
-            for (Object vertice : vertices) {
-                mxCell cell = (mxCell) vertice;
-                mxCell maxEdge = getMaxEdge(cell);
-                if (maxEdge != null) {
-                    maxEdgeList.add(maxEdge);
-                }
-            }
-        }
-
-        if (maxEdgeList.size() > 0) {
-            diametr = maxEdgeList.iterator().next();
-            radius = diametr;
-            for (mxCell edge : maxEdgeList) {
-                if (getDist(edge).compareTo(getDist(diametr)) > 0) {
-                    diametr = edge;
-                }
-                if (getDist(edge).compareTo(getDist(radius)) < 0) {
-                    radius = edge;
-                }
-            }
-
-            System.out.println("=============================");
-            showDiametr(diametr);
-            System.out.println("Diametr: " + getDist(diametr) + "; " + diametr);
-
-            for (mxCell edge : maxEdgeList) {
-                if (getDist(edge).compareTo(getDist(radius)) == 0) {
-                    showRadius(edge);
-                    System.out.println("Radius: " + getDist(edge) + "; " + edge);
-                }
-            }
-            System.out.println("=============================");
-        }
-
-    }
-
-    /**
-     * Показывает диаметр на изображении графа
-     * @param diametr Диаметр
-     */
-    private void showDiametr(mxCell diametr) {
-        graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, mxUtils.hexString(Const.STROKECOLOR_DIAMETR), new Object[]{diametr});
-    }
-
-    /**
-     * Показывает радиус на изображении графа
-     * @param radius Радиус
-     */
-    private void showRadius(mxCell radius) {
-        graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, mxUtils.hexString(Const.STROKECOLOR_RADIUS), new Object[]{radius});
-        if (radius.getSource() != null) {
-            graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, mxUtils.hexString(Const.STROKECOLOR_RADIUS), new Object[]{radius.getSource()});
-            graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, mxUtils.hexString(Const.FILLCOLOR_RADIUS), new Object[]{radius.getSource()});
-        }
-    }
-
-    /**
-     * Находит максимальную по длине грань в передаваемой вершине
-     * @param cell Вершина
-     * @return Максимальная по длине грань
-     */
-    private mxCell getMaxEdge(mxCell cell) {
-        if (cell.getEdgeCount() > 0) {
-            mxCell maxEdge = (mxCell) cell.getEdgeAt(0);
-
-            if (getDist(maxEdge) != null) {
-                for (int i=0; i<cell.getEdgeCount(); i++) {
-                    final mxCell edge = (mxCell) cell.getEdgeAt(i);
-
-                    final Double distEdge = getDist(edge);
-                    final Double distMaxEdge = getDist(maxEdge);
-                    if (distEdge!=null && distEdge.compareTo(distMaxEdge) > 0) {
-                        maxEdge = edge;
-                    }
-                }
-
-                System.out.println(cell.getValue() + ": maxEdge=" + getDist(maxEdge, 7));
-                return maxEdge;
-            }
-        }
-
-        return null;
-    }
-
-    /**
      * Сброс стиля ячеек на стандартный
      * @param objects Масив вершин
      */
     private void resetStyleCells(Object[] objects) {
-
         graph.setCellStyles(mxConstants.STYLE_FONTSIZE, Const.FONT_SIZE_DEF, objects);
         graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, mxUtils.hexString(Const.STROKECOLOR_DEF), objects);
         graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, mxUtils.hexString(Const.FILLCOLOR_DEF), objects);
         graph.setCellStyles(mxConstants.STYLE_FONTCOLOR, mxUtils.hexString(Const.FONTCOLOR_DEF), objects);
         graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, Const.STROKEWIDTH_DEF, objects);
-
     }
 
     /**
-     * Показывает длину грани на ее заголовке
+     * Изменяет Заголовок на Гранях
      */
     private void changeEdgeTitles() {
         final Object[] edges = graph.getChildEdges(parent);
 
         for (Object edge : edges) {
             mxCell cell = (mxCell) edge;
-            cell.setValue(getDist(cell, 7));
+            cell.setValue("");
         }
     }
 
@@ -282,38 +200,6 @@ public class GraphUtil {
      */
     public void deleteCell() {
         mxGraphActions.getDeleteAction().actionPerformed(new ActionEvent(getGraphComponent(), 0, ""));
-    }
-
-    /**
-     * Возвращает длину грани
-     * @param cell Грань
-     * @return Длина грани
-     */
-    private Double getDist(mxCell cell) {
-        logger.debug("getDist()");
-
-        if (cell.getSource() != null && cell.getTarget() != null) {
-            final mxGeometry sourcePoint = cell.getSource().getGeometry();
-            final mxGeometry targetPoint = cell.getTarget().getGeometry();
-
-            final double width = Math.pow(sourcePoint.getX() - targetPoint.getX(), 2);
-            final double height = Math.pow(sourcePoint.getY() - targetPoint.getY(), 2);
-
-            return Math.pow(width + height, (double)1/2);
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * Возвращает длину грани в виде строки, с указанным размером
-     * @param cell Грань
-     * @param length Длина возвращаемой строки
-     * @return Длина грани
-     */
-    private String getDist(mxCell cell, int length) {
-        final Double dist = getDist(cell);
-        return dist != null && dist.toString().length() >= length ? dist.toString().substring(0, length-1) : "";
     }
 
     public mxGraphComponent getGraphComponent() {
