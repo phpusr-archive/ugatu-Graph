@@ -5,6 +5,7 @@ import com.mxgraph.io.mxGdCodec;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGeometry;
 import com.mxgraph.model.mxGraphModel;
+import com.mxgraph.model.mxICell;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.swing.util.mxGraphActions;
 import com.mxgraph.util.*;
@@ -18,8 +19,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 
@@ -37,6 +37,9 @@ public class GraphUtil {
     private int countVertex = 0;
     private final Logger logger;
 
+    /** TODO */
+    private Stack<mxICell> stack;
+    private List<mxICell> finshedList;
 
     public GraphUtil(GraphEditor frame) {
         logger = LoggerFactory.getLogger(GraphUtil.class);
@@ -99,15 +102,49 @@ public class GraphUtil {
         //Сброс стиля для граней
         resetStyleCells(graph.getChildEdges(parent));
 
-        task();
+        //task();
+        asd();
 
         graph.refresh();
+    }
+
+    /** TODO */
+    private void asd() {
+        System.out.println(">> asd");
+        stack = new Stack<mxICell>();
+        finshedList = new ArrayList<mxICell>();
+
+        final Object[] vertices = graph.getChildVertices(parent);
+        if (vertices.length > 0) {
+            mxCell cell = (mxCell) vertices[0];
+
+            if (cell.getEdgeCount() > 0) {
+                stack.push(cell);
+                while(!stack.empty()) passageGraphDepth();
+            }
+        }
+    }
+
+    /** Прохождение Графа в глубь */
+    private void passageGraphDepth() {
+        mxICell cell = stack.pop();
+        if (finshedList.indexOf(cell) == -1) {
+            System.out.println(cell.getValue());
+            finshedList.add(cell);
+
+            for (int i = 0; i < cell.getEdgeCount(); i++) {
+                mxICell child = ((mxCell)cell.getEdgeAt(i)).getTarget();
+                if (cell != child && finshedList.indexOf(child) == -1) {
+                    stack.push(child);
+                }
+            }
+        }
     }
 
     /**
      * Находит расстояния в графе: диаметр, центр, радиус графа
      */
-    private void task() {
+    private void task() { //TODO удалить не используемое
         mxCell diametr, radius;
         Set<mxCell> maxEdgeList = new HashSet<mxCell>();
         final Object[] vertices = graph.getChildVertices(parent);
