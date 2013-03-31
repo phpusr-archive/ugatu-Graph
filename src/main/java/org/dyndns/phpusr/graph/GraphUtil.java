@@ -35,7 +35,11 @@ public class GraphUtil {
     private Object parent;
     private final mxGraphComponent graphComponent;
     private final JFrame frame;
-    private int countVertex = 0;
+    /** Кол-во вершин */
+    private int countVertex;
+    /** Название вершин */
+    private char charVertex;
+    /** Логгирование */
     private final Logger logger;
 
     /** Стек */
@@ -48,6 +52,8 @@ public class GraphUtil {
     public GraphUtil(GraphEditor frame) {
         logger = LoggerFactory.getLogger(GraphUtil.class);
         this.frame = frame;
+        countVertex = 0;
+        charVertex = 'A';
 
         graph = new mxGraph();
         customGraph(graph);
@@ -187,7 +193,7 @@ public class GraphUtil {
         try {
             int x = (int) (Math.random() * (Const.FRAME_WIDTH - 2 * Const.VERTEX_WIDTH));
             int y = (int) (Math.random() * (Const.FRAME_HEIGHT - 2 * Const.VERTEX_HEIGHT));
-            String title = Const.VERTEX_NAME_STD + " " + Integer.toString(++countVertex);
+            String title = "" + charVertex++;
             graph.insertVertex(parent, null, title, x, y, Const.VERTEX_WIDTH, Const.VERTEX_HEIGHT);
         }
         finally {
@@ -235,6 +241,7 @@ public class GraphUtil {
         document.parse(mxUtils.readFile(file.getAbsolutePath()));
         openGD(file, document);
         countVertex = 0;
+        charVertex = 'A';
     }
 
     /**
@@ -268,6 +275,7 @@ public class GraphUtil {
         ((mxGraphModel) graph.getModel()).clear();
         parent = graph.getDefaultParent();
         countVertex = 0;
+        charVertex = 'A';
     }
 
     /**

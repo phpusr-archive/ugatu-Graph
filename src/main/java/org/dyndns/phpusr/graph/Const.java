@@ -14,7 +14,6 @@ public class Const {
     public static final int VERTEX_WIDTH = 80;
     public static final int VERTEX_HEIGHT = 30;
 
-    public static final String VERTEX_NAME_STD = "Vertex";
     public static final String CHOOSE_FILE_FILTER_DESCRIP = "Graph Drawing file (.txt)";
     public static final String EXT_DEF = ".txt";
 
@@ -24,9 +23,5 @@ public class Const {
     public static final Color STROKECOLOR_DEF = Color.GRAY;
     public static final Color FILLCOLOR_DEF = Color.LIGHT_GRAY;
     public static final Color FONTCOLOR_DEF = Color.BLACK;
-
-    public static final Color STROKECOLOR_DIAMETR = Color.ORANGE;
-    public static final Color STROKECOLOR_RADIUS = Color.GREEN;
-    public static final Color FILLCOLOR_RADIUS = Color.LIGHT_GRAY;
 
 }
