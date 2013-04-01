@@ -11,17 +11,17 @@ import com.mxgraph.view.mxGraph;
 
 import javax.swing.*;
 
-public class JGraph extends JFrame {
+public class TestJGraph extends JFrame {
 
     public static void main(String[] args) {
-        JGraph frame = new JGraph();
+        TestJGraph frame = new TestJGraph();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 320);
         frame.setVisible(true);
 
     }
 
-    private JGraph() {
+    private TestJGraph() {
         super("HabraGraph");
 
         mxGraph graph = new mxGraph();
