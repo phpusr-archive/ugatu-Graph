@@ -1,3 +1,3 @@
-rem java -jar Graph.jar
-java -cp Graph.jar org.dyndns.phpusr.graph.Main
+rem java -jar GraphASD.jar
+java -cp GraphASD.jar org.dyndns.phpusr.graph.Main
 pause
