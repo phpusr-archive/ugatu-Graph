@@ -1,1 +1,1 @@
-copy ..\out\artifacts\Graph_jar\Graph.jar Graph.jar
+copy ..\out\artifacts\GraphASD_jar\Graph.jar GraphASD.jar

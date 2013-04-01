@@ -1,2 +1,2 @@
 cd ..
-git archive --format=zip --prefix=Graph-v1.0/ master > bin/Graph-v1.0.zip
+git archive --format=zip --prefix=GraphASD-v1.0/ asd > bin/GraphASD-v1.0.zip
