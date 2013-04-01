@@ -1,15 +1,15 @@
 <component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="Graph:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/Graph_jar</output-path>
+  <artifact type="jar" name="GraphASD:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/GraphASD_jar</output-path>
     <root id="archive" name="Graph.jar">
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" />
       </element>
       <element id="module-output" name="Graph" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/lib/logback-classic-1.0.6.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/lib/jgraphx.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/lib/slf4j-api-1.6.5.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/logback-core-1.0.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/jgraphx.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/logback-classic-1.0.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/slf4j-api-1.6.5.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>
