@@ -18,9 +18,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * 
@@ -52,7 +50,7 @@ public class GraphUtil {
     public GraphUtil(GraphEditor frame) {
         logger = LoggerFactory.getLogger(GraphUtil.class);
         this.frame = frame;
-        countVertex = 0;
+        countVertex = 1;
         charVertex = 'A';
 
         graph = new mxGraph();
@@ -112,20 +110,30 @@ public class GraphUtil {
         //Сброс стиля для граней
         resetStyleCells(graph.getChildEdges(parent));
 
-        task();
+        task("");
 
         graph.refresh();
     }
 
-    /** TODO Обход и вывод Графа */
-    private void task() {
+    /** Поиск в Глубину с упорядочиванием вершин */
+    public void task(String head) {
         stack = new Stack<mxICell>();
         finshedList = new ArrayList<mxICell>();
         graphList = new ArrayList<mxICell>();
 
         final Object[] vertices = graph.getChildVertices(parent);
         if (vertices.length > 0) {
-            mxCell cell = (mxCell) vertices[0];
+            List<Object> listV = Arrays.asList(vertices);
+
+            //Поиск начальной указанной с Формы Вершины
+            mxCell cell = (mxCell) listV.get(0);
+            for (Object o : listV) {
+                mxCell tmpCell = (mxCell) o;
+                if (tmpCell.getValue().equals(head)) {
+                    cell = tmpCell;
+                    break;
+                }
+            }
 
             if (cell.getEdgeCount() > 0) {
                 stack.push(cell);
@@ -134,6 +142,18 @@ public class GraphUtil {
 
             printGraphList(graphList);
         }
+    }
+
+    /** Сортировка списка вершин */
+    private void sortList(List<Object> list) {
+        Collections.sort(list, new Comparator<Object>() {
+            public int compare(Object o1, Object o2) {
+                mxICell cell1 = (mxICell) o1;
+                mxICell cell2 = (mxICell) o2;
+
+                return cell1.getValue().toString().compareTo(cell2.getValue().toString()) * -1;
+            }
+        });
     }
 
     /** Вывод вершин Графа */
@@ -152,8 +172,19 @@ public class GraphUtil {
             graphList.add(cell);
             finshedList.add(cell);
 
+            List<Object> listV = new ArrayList<Object>();
+
             for (int i = 0; i < cell.getEdgeCount(); i++) {
-                mxICell child = ((mxCell)cell.getEdgeAt(i)).getTarget();
+                mxICell child = ((mxCell)cell.getEdgeAt(i)).getSource();
+                if (listV.indexOf(child) == -1) listV.add(child);
+                child = ((mxCell)cell.getEdgeAt(i)).getTarget();
+                if (listV.indexOf(child) == -1) listV.add(child);
+
+            }
+            sortList(listV);
+
+            for (Object o : listV) {
+                mxICell child = (mxCell) o;
                 if (cell != child && finshedList.indexOf(child) == -1) {
                     stack.push(child);
                 }
@@ -193,7 +224,7 @@ public class GraphUtil {
         try {
             int x = (int) (Math.random() * (Const.FRAME_WIDTH - 2 * Const.VERTEX_WIDTH));
             int y = (int) (Math.random() * (Const.FRAME_HEIGHT - 2 * Const.VERTEX_HEIGHT));
-            String title = "" + charVertex++;
+            String title = "" + countVertex++;
             graph.insertVertex(parent, null, title, x, y, Const.VERTEX_WIDTH, Const.VERTEX_HEIGHT);
         }
         finally {
@@ -240,7 +271,7 @@ public class GraphUtil {
         mxGdDocument document = new mxGdDocument();
         document.parse(mxUtils.readFile(file.getAbsolutePath()));
         openGD(file, document);
-        countVertex = 0;
+        countVertex = 1;
         charVertex = 'A';
     }
 
@@ -274,7 +305,7 @@ public class GraphUtil {
     public void clear() {
         ((mxGraphModel) graph.getModel()).clear();
         parent = graph.getDefaultParent();
-        countVertex = 0;
+        countVertex = 1;
         charVertex = 'A';
     }
 
