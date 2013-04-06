@@ -135,12 +135,12 @@ public class GraphUtil {
                 }
             }
 
-            if (cell.getEdgeCount() > 0) {
-                stack.push(cell);
-                while(!stack.empty()) passageGraphDepth();
+            if (cell.getEdgeCount() > 0) { // Если у Начальной вершины есть связи с другими вершинами
+                stack.push(cell); // Добавляем Начальную вершину в Стек
+                while(!stack.empty()) passageGraphDepth(); // Пока стек не пустой запускаем ф-ю: passageGraphDepth()
             }
 
-            printGraphList(graphList);
+            printGraphList(graphList); // Ф-я вывода полученного списка вершин
         }
     }
 
@@ -167,26 +167,26 @@ public class GraphUtil {
 
     /** Прохождение Графа в глубь */
     private void passageGraphDepth() {
-        mxICell cell = stack.pop();
-        if (finshedList.indexOf(cell) == -1) {
-            graphList.add(cell);
-            finshedList.add(cell);
+        mxICell cell = stack.pop(); // Извлекаем вершину из стека
+        if (finshedList.indexOf(cell) == -1) { // Если вершины нет в списке используемых
+            graphList.add(cell); // Добавляем вершину список для вывода
+            finshedList.add(cell); // Добавляем вершину в список используемых
 
-            List<Object> listV = new ArrayList<Object>();
+            List<Object> listV = new ArrayList<Object>(); // Создаем список для вершиных связанных с вершиной cell
 
-            for (int i = 0; i < cell.getEdgeCount(); i++) {
+            for (int i = 0; i < cell.getEdgeCount(); i++) { // Добавляем в список: listV, все связанные с cell вершины
                 mxICell child = ((mxCell)cell.getEdgeAt(i)).getSource();
                 if (listV.indexOf(child) == -1) listV.add(child);
                 child = ((mxCell)cell.getEdgeAt(i)).getTarget();
                 if (listV.indexOf(child) == -1) listV.add(child);
 
             }
-            sortList(listV);
+            sortList(listV); // Упорядочиваем список по уменьшению чисел
 
-            for (Object o : listV) {
+            for (Object o : listV) { // Проходим по всем вершинам списка: listV
                 mxICell child = (mxCell) o;
-                if (cell != child && finshedList.indexOf(child) == -1) {
-                    stack.push(child);
+                if (cell != child && finshedList.indexOf(child) == -1) { // Если вершины нет в списке используемых
+                    stack.push(child); // Добавляем вершину в стек
                 }
             }
         }
