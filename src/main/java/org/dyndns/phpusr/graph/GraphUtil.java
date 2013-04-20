@@ -47,8 +47,10 @@ public class GraphUtil {
     private List<mxICell> finshedList;
     /** Список вершин при обходе Графа */
     private List<mxICell> graphList;
-    /** TODO */
-    private List<mxCell> generalComponent = null;
+    /** Компонента в которую будут добавляться вершины */
+    private List<mxCell> generalComponent;
+    /** Таблица Крускала */
+    List<Kruskal> kruskalTable;
 
     public GraphUtil(GraphEditor frame) {
         logger = LoggerFactory.getLogger(GraphUtil.class);
@@ -113,7 +115,8 @@ public class GraphUtil {
         graph.refresh();
     }
 
-    /** TODO */
+    /** Генератор значений для вершин */
+    //TODO сделать возможность ввода значений
     private void generateEdgeValues() {
         List<Object> edges = Arrays.asList(graph.getChildEdges(parent));
 
@@ -127,9 +130,9 @@ public class GraphUtil {
 
     }
 
-    /** TODO Алгоритм Крускала */
+    /** Алгоритм Крускала */
     public void kruskal() {
-        System.out.println(">>Kruskal worked!");
+        System.out.println(">>Kruskal");
         //Ребра
         List<Object> edges = Arrays.asList(graph.getChildEdges(parent));
         //Вершины
@@ -137,7 +140,7 @@ public class GraphUtil {
         //Компоненты
         List<List<mxCell>> components = new ArrayList<List<mxCell>>();
         //Таблица Крускала
-        List<Kruskal> kruskalTable = new ArrayList<Kruskal>();
+        kruskalTable = new ArrayList<Kruskal>();
         generalComponent = null;
 
         //Сортируем ребра по весу
@@ -157,9 +160,9 @@ public class GraphUtil {
             cells.add(cell);
             components.add(cells);
         }
-        print2list(components);
-        System.out.println("\n>>Build Graph");
+        printComponents(components);
 
+        System.out.println("\n>>Build Graph");
         for (Object edge : edges) {
             mxCell cell = (mxCell) edge;
             Kruskal kruskal = new Kruskal(cell);
@@ -172,12 +175,12 @@ public class GraphUtil {
 
                 kruskalTable.add(kruskal);
                 System.out.println(kruskal);
-                print2list(components);
+                printComponents(components);
             }
         }
     }
 
-    /** TODO */
+    /** Образует ли добавление cell цикл */
     private boolean isCycle(mxCell cell, List<List<mxCell>> components) {
         List<mxCell> sourceComponent = null, targetComponent = null;
 
@@ -185,7 +188,7 @@ public class GraphUtil {
             //Если вершины из одной компоненты
             if (component.contains(cell.getSource()) && component.contains(cell.getTarget())) {
                 return true;
-            } else {
+            } else { //Если из разных
                 if (component.contains(cell.getSource())) {
                     sourceComponent = component;
                 } else if (component.contains(cell.getTarget())) {
@@ -196,6 +199,7 @@ public class GraphUtil {
 
         if (sourceComponent == null || targetComponent == null) return false;
 
+        //Если Общая компонента еще не найдена
         if (generalComponent == null) {
             int sourceValue = Integer.parseInt(cell.getSource().getValue().toString());
             int targetValue = Integer.parseInt(cell.getTarget().getValue().toString());
@@ -207,6 +211,7 @@ public class GraphUtil {
             }
         }
 
+        //Добавление вершин в Общую компоненту
         if (!generalComponent.contains(cell.getSource())) {
             generalComponent.add((mxCell) cell.getSource());
             sourceComponent.remove(cell.getSource());
@@ -219,8 +224,8 @@ public class GraphUtil {
         return false;
     }
 
-    /** TODO */
-    private void print2list(List<List<mxCell>> components) {
+    /** Вывод Компонент */
+    private void printComponents(List<List<mxCell>> components) {
         System.out.print("\t--Componets:");
         for (List<mxCell> component : components) {
             System.out.print("(");
@@ -329,6 +334,24 @@ public class GraphUtil {
         graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, mxUtils.hexString(Const.FILLCOLOR_DEF), objects);
         //Отключение стрелок у Граней
         graph.setCellStyles(mxConstants.STYLE_ENDARROW, mxConstants.NONE, objects);
+
+        //TODO доделать перекрашивание удаляемых ребер или сделать их удаление
+        if (kruskalTable != null) {
+            graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, mxUtils.hexString(Color.WHITE), getDelVert());
+        }
+    }
+
+    /** Возвращает удаляемые ребра */
+    private mxCell[] getDelVert() {
+        mxCell[] cells = new mxCell[kruskalTable.size()];
+        int count = 0;
+        for (Kruskal kruskal : kruskalTable) {
+            if (!kruskal.isUse()) {
+                cells[count++] = kruskal.getEdge();
+            }
+        }
+
+        return cells;
     }
 
     /**
