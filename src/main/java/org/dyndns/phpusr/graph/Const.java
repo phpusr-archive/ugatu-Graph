@@ -18,10 +18,10 @@ public class Const {
     public static final String EXT_DEF = ".txt";
 
     //Стили ячеек
-    public static final String FONT_SIZE_DEF = "18";
-    public static final String STROKEWIDTH_DEF = "2";
-    public static final Color STROKECOLOR_DEF = Color.GRAY;
-    public static final Color FILLCOLOR_DEF = Color.LIGHT_GRAY;
+    public static final String FONT_SIZE_DEF = "24";
+    public static final String STROKEWIDTH_DEF = "5";
+    public static final Color STROKECOLOR_DEF = new Color(119, 178, 115);
+    public static final Color FILLCOLOR_DEF = new Color(193, 239, 192);
     public static final Color FONTCOLOR_DEF = Color.BLACK;
 
 }

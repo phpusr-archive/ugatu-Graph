@@ -97,8 +97,6 @@ public class GraphUtil {
     private void customGraph(mxGraph graph) {
         //Отключение висячих Граней
         graph.setAllowDanglingEdges(false);
-        //Отключение стрелок у Граней
-        graph.setCellStyles(mxConstants.STYLE_ENDARROW, mxConstants.NONE);
     }
 
     /**
@@ -198,11 +196,20 @@ public class GraphUtil {
      * @param objects Масив вершин
      */
     private void resetStyleCells(Object[] objects) {
+        //Размер шрифта
         graph.setCellStyles(mxConstants.STYLE_FONTSIZE, Const.FONT_SIZE_DEF, objects);
-        graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, mxUtils.hexString(Const.STROKECOLOR_DEF), objects);
-        graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, mxUtils.hexString(Const.FILLCOLOR_DEF), objects);
+        //Жирный шрифт
+        graph.setCellStyles(mxConstants.STYLE_FONTSTYLE, Integer.toString(mxConstants.FONT_BOLD), objects);
+        //Цвет шрифта
         graph.setCellStyles(mxConstants.STYLE_FONTCOLOR, mxUtils.hexString(Const.FONTCOLOR_DEF), objects);
+        //Размер обводки
         graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, Const.STROKEWIDTH_DEF, objects);
+        //Цвет обводки
+        graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, mxUtils.hexString(Const.STROKECOLOR_DEF), objects);
+        //Цвет заливки
+        graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, mxUtils.hexString(Const.FILLCOLOR_DEF), objects);
+        //Отключение стрелок у Граней
+        graph.setCellStyles(mxConstants.STYLE_ENDARROW, mxConstants.NONE, objects);
     }
 
     /**
