@@ -47,6 +47,8 @@ public class GraphUtil {
     private List<mxICell> finshedList;
     /** Список вершин при обходе Графа */
     private List<mxICell> graphList;
+    /** TODO */
+    private List<mxCell> generalComponent = null;
 
     public GraphUtil(GraphEditor frame) {
         logger = LoggerFactory.getLogger(GraphUtil.class);
@@ -69,11 +71,7 @@ public class GraphUtil {
         graph.addListener(mxEvent.ADD_CELLS, new mxEventSource.mxIEventListener() {
             public void invoke(Object sender, mxEventObject evt) {
                 logger.debug("ADD_CELLS");
-
-                changeEdgeTitles();
-                resetStyleCells((Object[]) evt.getProperty("cells"));
-
-                graph.refresh();
+                onChange();
             }
         });
         getGraphComponent().getGraphControl().addMouseListener(new MouseAdapter() {
@@ -85,7 +83,7 @@ public class GraphUtil {
             @Override
             public void mouseReleased(MouseEvent e) {
                 if (e.isPopupTrigger()) {
-                    logger.debug("Delete object");
+                    logger.debug("DELETE");
                     deleteCell();
                 }
             }
@@ -106,20 +104,133 @@ public class GraphUtil {
      * Запускается при изменении графа
      */
     private void onChange() {
-        changeEdgeTitles();
+        generateEdgeValues();
         //Сброс стиля для веришн
         resetStyleCells(graph.getChildVertices(parent));
         //Сброс стиля для граней
         resetStyleCells(graph.getChildEdges(parent));
 
-        task("");
-
         graph.refresh();
+    }
+
+    /** TODO */
+    private void generateEdgeValues() {
+        List<Object> edges = Arrays.asList(graph.getChildEdges(parent));
+
+        for (Object edge : edges) {
+            mxCell cell = (mxCell) edge;
+            if (cell.getValue().equals("")) {
+                cell.setValue(Integer.toString(Math.round((float)Math.random()*100)));
+            }
+        }
+
+
     }
 
     /** TODO Алгоритм Крускала */
     public void kruskal() {
         System.out.println(">>Kruskal worked!");
+        //Ребра
+        List<Object> edges = Arrays.asList(graph.getChildEdges(parent));
+        //Вершины
+        Object[] vertices = graph.getChildVertices(parent);
+        //Компоненты
+        List<List<mxCell>> components = new ArrayList<List<mxCell>>();
+        //Таблица Крускала
+        List<Kruskal> kruskalTable = new ArrayList<Kruskal>();
+        generalComponent = null;
+
+        //Сортируем ребра по весу
+        sortList(edges);
+        System.out.print("\t--Edges:");
+        for (Object edge : edges) {
+            mxCell cell = (mxCell) edge;
+            if (edges.indexOf(cell) > 0) System.out.print(",");
+            System.out.print(cell.getValue());
+        }
+        System.out.println();
+
+        //Формируем Список компоненты
+        for (Object vertice : vertices) {
+            mxCell cell = (mxCell) vertice;
+            ArrayList<mxCell> cells = new ArrayList<mxCell>();
+            cells.add(cell);
+            components.add(cells);
+        }
+        print2list(components);
+        System.out.println("\n>>Build Graph");
+
+        for (Object edge : edges) {
+            mxCell cell = (mxCell) edge;
+            Kruskal kruskal = new Kruskal(cell);
+
+            if (!isCycle(cell, components)) {
+                kruskal.setUse(true);
+                int lastCost = kruskalTable.size()>0 ? kruskalTable.get(kruskalTable.size() - 1).getCost() : 0;
+                int cost = Integer.parseInt(cell.getValue().toString());
+                kruskal.setCost(lastCost + cost);
+
+                kruskalTable.add(kruskal);
+                System.out.println(kruskal);
+                print2list(components);
+            }
+        }
+    }
+
+    /** TODO */
+    private boolean isCycle(mxCell cell, List<List<mxCell>> components) {
+        List<mxCell> sourceComponent = null, targetComponent = null;
+
+        for (List<mxCell> component : components) {
+            //Если вершины из одной компоненты
+            if (component.contains(cell.getSource()) && component.contains(cell.getTarget())) {
+                return true;
+            } else {
+                if (component.contains(cell.getSource())) {
+                    sourceComponent = component;
+                } else if (component.contains(cell.getTarget())) {
+                    targetComponent = component;
+                }
+            }
+        }
+
+        if (sourceComponent == null || targetComponent == null) return false;
+
+        if (generalComponent == null) {
+            int sourceValue = Integer.parseInt(cell.getSource().getValue().toString());
+            int targetValue = Integer.parseInt(cell.getTarget().getValue().toString());
+
+            if (sourceValue < targetValue && sourceComponent.contains(cell.getSource())) {
+                generalComponent = sourceComponent;
+            } else {
+                generalComponent = targetComponent;
+            }
+        }
+
+        if (!generalComponent.contains(cell.getSource())) {
+            generalComponent.add((mxCell) cell.getSource());
+            sourceComponent.remove(cell.getSource());
+        }
+        if (!generalComponent.contains(cell.getTarget())) {
+            generalComponent.add((mxCell) cell.getTarget());
+            targetComponent.remove(cell.getTarget());
+        }
+
+        return false;
+    }
+
+    /** TODO */
+    private void print2list(List<List<mxCell>> components) {
+        System.out.print("\t--Componets:");
+        for (List<mxCell> component : components) {
+            System.out.print("(");
+            for (mxCell cell : component) {
+                if (component.indexOf(cell) > 0) System.out.print(",");
+                System.out.print(cell.getValue());
+            }
+            System.out.print(")");
+        }
+        System.out.println();
     }
 
     /** Поиск в Глубину с упорядочиванием вершин */
@@ -151,14 +262,14 @@ public class GraphUtil {
         }
     }
 
-    /** Сортировка списка вершин */
+    /** Сортировка списка ребер */
     private void sortList(List<Object> list) {
         Collections.sort(list, new Comparator<Object>() {
             public int compare(Object o1, Object o2) {
-                mxICell cell1 = (mxICell) o1;
-                mxICell cell2 = (mxICell) o2;
+                int value1 = Integer.parseInt(((mxICell) o1).getValue().toString());
+                int value2 = Integer.parseInt(((mxICell) o2).getValue().toString());
 
-                return cell1.getValue().toString().compareTo(cell2.getValue().toString()) * -1;
+                return Integer.compare(value1, value2);
             }
         });
     }
@@ -218,18 +329,6 @@ public class GraphUtil {
         graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, mxUtils.hexString(Const.FILLCOLOR_DEF), objects);
         //Отключение стрелок у Граней
         graph.setCellStyles(mxConstants.STYLE_ENDARROW, mxConstants.NONE, objects);
-    }
-
-    /**
-     * Изменяет Заголовок на Гранях
-     */
-    private void changeEdgeTitles() {
-        final Object[] edges = graph.getChildEdges(parent);
-
-        for (Object edge : edges) {
-            mxCell cell = (mxCell) edge;
-            cell.setValue("");
-        }
     }
 
     /**
