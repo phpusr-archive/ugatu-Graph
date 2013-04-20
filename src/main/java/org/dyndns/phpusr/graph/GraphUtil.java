@@ -14,12 +14,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.List;
 
 /**
  * 
@@ -56,6 +58,7 @@ public class GraphUtil {
         parent = graph.getDefaultParent();
 
         graphComponent = new mxGraphComponent(graph);
+        graphComponent.getViewport().setBackground(Color.WHITE);
 
         graph.getModel().addListener(mxEvent.CHANGE, new mxEventSource.mxIEventListener() {
             public void invoke(Object sender, mxEventObject evt) {
