@@ -162,9 +162,6 @@ public class GraphUtil {
             string.append(cell.getValue()).append(", ");
         }
         GraphForm.getInstance(null).getLblVertex().setText(string.toString());
-
-        System.out.println(">> Print Graph List");
-        System.out.println(string.append("\n"));
     }
 
     /** Прохождение Графа в глубь */

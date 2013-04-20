@@ -58,6 +58,7 @@ public class GraphForm {
                 if (JOptionPane.showConfirmDialog(util.getGraphComponent(), mxResources.get("loseChanges"),
                         "Подтверждение", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     util.clear();
+                    lblVertex.setText("");
                 }
             }
         });
