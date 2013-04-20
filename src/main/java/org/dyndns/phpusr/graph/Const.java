@@ -14,9 +14,6 @@ public class Const {
     public static final int VERTEX_WIDTH = 80;
     public static final int VERTEX_HEIGHT = 80;
 
-    public static final String CHOOSE_FILE_FILTER_DESCRIP = "Graph Drawing file (.txt)";
-    public static final String EXT_DEF = ".txt";
-
     //Стили ячеек
     public static final String FONT_SIZE_DEF = "24";
     public static final String STROKEWIDTH_DEF = "5";
