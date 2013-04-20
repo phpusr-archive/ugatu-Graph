@@ -28,6 +28,7 @@ import java.util.List;
 
 public class GraphUtil {
 
+    //TODO комменты
     private final mxGraph graph;
     private Object parent;
     private final mxGraphComponent graphComponent;
@@ -43,6 +44,8 @@ public class GraphUtil {
     private List<mxICell> finshedList;
     /** Список вершин при обходе Графа */
     private List<mxICell> graphList;
+    /** Лейбл для вывода Графа */
+    private JLabel lblVertex;
 
     public GraphUtil(GraphEditor frame) {
         logger = LoggerFactory.getLogger(GraphUtil.class);
@@ -156,11 +159,14 @@ public class GraphUtil {
 
     /** Вывод вершин Графа */
     private void printGraphList(List<mxICell> graphList) {
-        System.out.println(">> Print Graph List");
+        StringBuilder string = new StringBuilder();
         for (mxICell cell : graphList) {
-            System.out.print(cell.getValue() + "; ");
+            string.append(cell.getValue()).append(", ");
         }
-        System.out.println("\n");
+        lblVertex.setText(string.toString());
+
+        System.out.println(">> Print Graph List");
+        System.out.println(string.append("\n"));
     }
 
     /** Прохождение Графа в глубь */
@@ -267,4 +273,7 @@ public class GraphUtil {
         frame.dispose();
     }
 
+    public void setLblVertex(JLabel lblVertex) {
+        this.lblVertex = lblVertex;
+    }
 }

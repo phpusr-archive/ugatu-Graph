@@ -25,10 +25,13 @@ public class GraphForm {
     private JButton btnNew;
     private JButton btnDelete;
     private JTextField txtHead;
+    private JLabel lblVertex;
     private GraphUtil util;
 
     public GraphForm(GraphUtil graphUtil) {
         this.util = graphUtil;
+        util.setLblVertex(lblVertex);
+        lblVertex.setText("");
         localizeForm();
 
         btnAdd.addActionListener(new ActionListener() {
