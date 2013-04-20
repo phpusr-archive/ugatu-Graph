@@ -3,6 +3,7 @@ package org.dyndns.phpusr.graph;
 import com.mxgraph.io.gd.mxGdDocument;
 import com.mxgraph.io.mxGdCodec;
 import com.mxgraph.model.mxCell;
+import com.mxgraph.model.mxGeometry;
 import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.model.mxICell;
 import com.mxgraph.swing.mxGraphComponent;
@@ -35,8 +36,6 @@ public class GraphUtil {
     private final JFrame frame;
     /** Кол-во вершин */
     private int countVertex;
-    /** Название вершин */
-    private char charVertex;
     /** Логгирование */
     private final Logger logger;
 
@@ -51,7 +50,6 @@ public class GraphUtil {
         logger = LoggerFactory.getLogger(GraphUtil.class);
         this.frame = frame;
         countVertex = 1;
-        charVertex = 'A';
 
         graph = new mxGraph();
         customGraph(graph);
@@ -97,7 +95,10 @@ public class GraphUtil {
      * @param graph Граф
      */
     private void customGraph(mxGraph graph) {
-        graph.setAllowDanglingEdges(false); //Отключение висячих Граней
+        //Отключение висячих Граней
+        graph.setAllowDanglingEdges(false);
+        //Отключение стрелок у Граней
+        graph.setCellStyles(mxConstants.STYLE_ENDARROW, mxConstants.NONE);
     }
 
     /**
@@ -225,9 +226,10 @@ public class GraphUtil {
             int x = (int) (Math.random() * (Const.FRAME_WIDTH - 2 * Const.VERTEX_WIDTH));
             int y = (int) (Math.random() * (Const.FRAME_HEIGHT - 2 * Const.VERTEX_HEIGHT));
             String title = "" + countVertex++;
-            graph.insertVertex(parent, null, title, x, y, Const.VERTEX_WIDTH, Const.VERTEX_HEIGHT);
-        }
-        finally {
+            mxCell cell = new mxCell(title, new mxGeometry(x, y, Const.VERTEX_WIDTH, Const.VERTEX_HEIGHT), "shape=ellipse");
+            cell.setVertex(true);
+            graph.addCell(cell);
+        } finally {
             graph.getModel().endUpdate();
         }
     }
@@ -272,13 +274,9 @@ public class GraphUtil {
         document.parse(mxUtils.readFile(file.getAbsolutePath()));
         openGD(file, document);
         countVertex = 1;
-        charVertex = 'A';
     }
 
-    /**
-     * @throws IOException Ошибка
-     *
-     */
+    /** Открывает граф из файла */
     private void openGD(File file, mxGdDocument document) {
 
         // Replaces file extension with .mxe
@@ -306,7 +304,6 @@ public class GraphUtil {
         ((mxGraphModel) graph.getModel()).clear();
         parent = graph.getDefaultParent();
         countVertex = 1;
-        charVertex = 'A';
     }
 
     /**
