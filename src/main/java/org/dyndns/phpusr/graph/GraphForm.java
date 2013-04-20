@@ -25,12 +25,12 @@ public class GraphForm {
     private JButton btnNew;
     private JButton btnDelete;
     private JTextField txtHead;
+    /** Лейбл для вывода Графа */
     private JLabel lblVertex;
     private GraphUtil util;
 
     public GraphForm(GraphUtil graphUtil) {
         this.util = graphUtil;
-        util.setLblVertex(lblVertex);
         lblVertex.setText("");
         localizeForm();
 
@@ -80,11 +80,11 @@ public class GraphForm {
      * @param util Утилита работа с библиотекой графа
      * @return Экземпляр данного класса
      */
-    public synchronized static JPanel getInstance(GraphUtil util){
+    public synchronized static GraphForm getInstance(GraphUtil util){
         if ( INSTANCE == null ) {
             INSTANCE = new GraphForm(util);
         }
-        return INSTANCE.pnlMain;
+        return INSTANCE;
     }
 
     /**
@@ -94,5 +94,13 @@ public class GraphForm {
         pnlGraph = new JPanel(new BorderLayout());
         pnlGraph.setSize(Const.FRAME_WIDTH, Const.FRAME_HEIGHT);
         pnlGraph.add(util.getGraphComponent());
+    }
+
+    public JLabel getLblVertex() {
+        return lblVertex;
+    }
+
+    public JPanel getPnlMain() {
+        return pnlMain;
     }
 }

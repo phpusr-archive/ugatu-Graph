@@ -49,7 +49,7 @@ class GraphEditor extends JFrame {
 
     public GraphEditor() throws HeadlessException {
         super(mxResources.get("prog.name"));
-        setContentPane(GraphForm.getInstance(new GraphUtil(this)));
+        setContentPane(GraphForm.getInstance(new GraphUtil(this)).getPnlMain());
         setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

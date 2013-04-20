@@ -26,12 +26,18 @@ import java.util.List;
  * Time: 17:57
  */
 
+/**
+ * Класс для работы с Графом
+ */
 public class GraphUtil {
 
-    //TODO комменты
+    /** Граф */
     private final mxGraph graph;
+    /** Родитель всех Вершин */
     private Object parent;
+    /** Компонент Граф */
     private final mxGraphComponent graphComponent;
+    /** Гланое окно */
     private final JFrame frame;
     /** Кол-во вершин */
     private int countVertex;
@@ -44,9 +50,8 @@ public class GraphUtil {
     private List<mxICell> finshedList;
     /** Список вершин при обходе Графа */
     private List<mxICell> graphList;
-    /** Лейбл для вывода Графа */
-    private JLabel lblVertex;
 
+    /** Конструктор */
     public GraphUtil(GraphEditor frame) {
         logger = LoggerFactory.getLogger(GraphUtil.class);
         this.frame = frame;
@@ -59,28 +64,19 @@ public class GraphUtil {
         graphComponent = new mxGraphComponent(graph);
         graphComponent.getViewport().setBackground(Color.WHITE);
 
+        /** Добавление обработчика изменения Графа */
         graph.getModel().addListener(mxEvent.CHANGE, new mxEventSource.mxIEventListener() {
             public void invoke(Object sender, mxEventObject evt) {
                 logger.debug("CHANGE");
                 onChange();
             }
         });
-        graph.addListener(mxEvent.ADD_CELLS, new mxEventSource.mxIEventListener() {
-            public void invoke(Object sender, mxEventObject evt) {
-                logger.debug("ADD_CELL");
-
-                changeEdgeTitles();
-                resetStyleCells((Object[]) evt.getProperty("cells"));
-
-                graph.refresh();
-            }
-        });
-        getGraphComponent().getGraphControl().addMouseListener(new MouseAdapter() {
+        /** Добавление обработчика Удаления вершины ПКМ */
+        graphComponent.getGraphControl().addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 mouseReleased(e);
             }
-
             @Override
             public void mouseReleased(MouseEvent e) {
                 if (e.isPopupTrigger()) {
@@ -105,12 +101,14 @@ public class GraphUtil {
      * Запускается при изменении графа
      */
     private void onChange() {
+        //Изменения заголовков вершин
         changeEdgeTitles();
         //Сброс стиля для веришн
         resetStyleCells(graph.getChildVertices(parent));
         //Сброс стиля для граней
         resetStyleCells(graph.getChildEdges(parent));
 
+        //Запуск поиска в Глубину
         task("");
 
         graph.refresh();
@@ -163,7 +161,7 @@ public class GraphUtil {
         for (mxICell cell : graphList) {
             string.append(cell.getValue()).append(", ");
         }
-        lblVertex.setText(string.toString());
+        GraphForm.getInstance(null).getLblVertex().setText(string.toString());
 
         System.out.println(">> Print Graph List");
         System.out.println(string.append("\n"));
@@ -173,7 +171,7 @@ public class GraphUtil {
     private void passageGraphDepth() {
         mxICell cell = stack.pop(); // Извлекаем вершину из стека
         if (finshedList.indexOf(cell) == -1) { // Если вершины нет в списке используемых
-            graphList.add(cell); // Добавляем вершину список для вывода
+            graphList.add(cell); // Добавляем вершину в список для вывода
             finshedList.add(cell); // Добавляем вершину в список используемых
 
             List<Object> listV = new ArrayList<Object>(); // Создаем список для вершиных связанных с вершиной cell
@@ -247,10 +245,10 @@ public class GraphUtil {
     }
 
     /**
-     * Удаляет вершину или грань графа
+     * Удаляет вершину или грань Графа
      */
     public void deleteCell() {
-        mxGraphActions.getDeleteAction().actionPerformed(new ActionEvent(getGraphComponent(), 0, ""));
+        mxGraphActions.getDeleteAction().actionPerformed(new ActionEvent(graphComponent, 0, ""));
     }
 
     public mxGraphComponent getGraphComponent() {
@@ -271,9 +269,5 @@ public class GraphUtil {
      */
     public void exit() {
         frame.dispose();
-    }
-
-    public void setLblVertex(JLabel lblVertex) {
-        this.lblVertex = lblVertex;
     }
 }
