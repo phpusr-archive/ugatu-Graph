@@ -1,7 +1,5 @@
 package org.dyndns.phpusr.graph;
 
-import com.mxgraph.io.gd.mxGdDocument;
-import com.mxgraph.io.mxGdCodec;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGeometry;
 import com.mxgraph.model.mxGraphModel;
@@ -18,8 +16,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
@@ -253,58 +249,6 @@ public class GraphUtil {
 
     public mxGraphComponent getGraphComponent() {
         return graphComponent;
-    }
-
-    /**
-     * Показывает текстовое представление графа
-     */
-    public void getEncodeGraph() {
-        String content = mxGdCodec.encode(graph).getDocumentString();
-
-        System.out.println("Encode:\n" + content);
-    }
-
-    /**
-     * Сохраняет граф в файл
-     * @param filename Имя файла с графом
-     * @throws IOException
-     */
-    public void saveToFile(String filename) throws IOException {
-        String content = mxGdCodec.encode(graph).getDocumentString();
-        mxUtils.writeFile(content, filename);
-    }
-
-    /**
-     * Открывает граф из файла
-     * @param file Файл с графом
-     * @throws IOException
-     */
-    public void openFile(File file) throws IOException {
-        mxGdDocument document = new mxGdDocument();
-        document.parse(mxUtils.readFile(file.getAbsolutePath()));
-        openGD(file, document);
-        countVertex = 1;
-    }
-
-    /** Открывает граф из файла */
-    private void openGD(File file, mxGdDocument document) {
-
-        // Replaces file extension with .mxe
-        String filename = file.getName();
-        filename = filename.substring(0, filename.length() - 4) + ".mxe";
-
-        if (new File(filename).exists()
-                && JOptionPane.showConfirmDialog(getGraphComponent(),
-                mxResources.get("overwriteExistingFile")) != JOptionPane.YES_OPTION) {
-            return;
-        }
-
-        ((mxGraphModel) graph.getModel()).clear();
-        mxGdCodec.decode(document, graph);
-        parent = graph.getDefaultParent();
-        getGraphComponent().zoomAndCenter();
-
-        onChange();
     }
 
     /**
