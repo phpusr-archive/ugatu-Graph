@@ -64,7 +64,7 @@ public class GraphUtil {
         });
         graph.addListener(mxEvent.ADD_CELLS, new mxEventSource.mxIEventListener() {
             public void invoke(Object sender, mxEventObject evt) {
-                logger.debug("ADD_CELLS");
+                logger.debug("ADD_CELL");
 
                 changeEdgeTitles();
                 resetStyleCells((Object[]) evt.getProperty("cells"));
@@ -81,7 +81,7 @@ public class GraphUtil {
             @Override
             public void mouseReleased(MouseEvent e) {
                 if (e.isPopupTrigger()) {
-                    logger.debug("Delete object");
+                    logger.debug("DELETE");
                     deleteCell();
                 }
             }
