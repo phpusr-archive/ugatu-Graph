@@ -20,8 +20,7 @@ public class Main {
 
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        }
-        catch (Exception e1) {
+        } catch (Exception e1) {
             e1.printStackTrace();
         }
 
@@ -33,14 +32,11 @@ public class Main {
 
 class GraphEditor extends JFrame {
 
-    /**
-     * Adds required resources for i18n
-     */
+    /** Adds required resources for i18n */
     static {
         try {
             mxResources.add("org/dyndns/phpusr/graph/editor");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             // ignore
         }
     }
@@ -50,6 +46,12 @@ class GraphEditor extends JFrame {
         setContentPane(GraphForm.getInstance(new GraphUtil(this)));
         setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //Выравнивание по центру
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        setLocation((screenWidth-getWidth())/2, (screenHeight-getHeight())/2);
     }
 
     public void showFrame() {
