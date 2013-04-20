@@ -117,6 +117,11 @@ public class GraphUtil {
         graph.refresh();
     }
 
+    /** TODO Алгоритм Крускала */
+    public void kruskal() {
+        System.out.println(">>Kruskal worked!");
+    }
+
     /** Поиск в Глубину с упорядочиванием вершин */
     public void task(String head) {
         stack = new Stack<mxICell>();

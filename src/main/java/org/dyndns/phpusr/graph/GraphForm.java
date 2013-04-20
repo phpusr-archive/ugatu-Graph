@@ -8,8 +8,6 @@ import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -31,7 +29,7 @@ public class GraphForm {
     private JButton btnNew;
     private JButton btnDelete;
     private JButton btnAbout;
-    private JTextField txtHead;
+    private JButton btnKruskal;
     private GraphUtil util;
 
     public GraphForm(GraphUtil graphUtil) {
@@ -135,10 +133,9 @@ public class GraphForm {
                 );
             }
         });
-        txtHead.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {                
-                util.task(txtHead.getText());
+        btnKruskal.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                util.kruskal();
             }
         });
     }
