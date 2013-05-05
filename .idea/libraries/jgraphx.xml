@@ -4,6 +4,9 @@
       <root url="jar://$PROJECT_DIR$/lib/jgraphx.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="file://E:/Distr/Programming/Java/Graph/jgraphx-1_10_0_6/jgraphx/src" />
+      <root url="file://E:/Distr/Programming/Java/Graph/jgraphx-1_10_0_6/jgraphx/examples" />
+    </SOURCES>
   </library>
 </component>
