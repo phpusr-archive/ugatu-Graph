@@ -41,8 +41,6 @@ public class GraphUtil {
     /** Логгирование */
     private final Logger logger;
 
-    /** Компонента в которую будут добавляться вершины */
-    private List<mxCell> generalComponent;
     /** Таблица Крускала */
     private List<Kruskal> kruskalTable;
 
@@ -134,7 +132,6 @@ public class GraphUtil {
         List<List<mxCell>> components = new ArrayList<List<mxCell>>();
         //Таблица Крускала
         kruskalTable = new ArrayList<Kruskal>();
-        generalComponent = null;
 
         //Сортируем ребра по весу
         sortList(edges);
@@ -195,26 +192,12 @@ public class GraphUtil {
 
         if (sourceComponent == null || targetComponent == null) return false;
 
-        //Если Общая компонента еще не найдена
-        if (generalComponent == null) {
-            int sourceValue = Integer.parseInt(cell.getSource().getValue().toString());
-            int targetValue = Integer.parseInt(cell.getTarget().getValue().toString());
-
-            if (sourceValue < targetValue && sourceComponent.contains(cell.getSource())) {
-                generalComponent = sourceComponent;
-            } else {
-                generalComponent = targetComponent;
-            }
-        }
-
-        //Добавление вершин в Общую компоненту
-        if (!generalComponent.contains(cell.getSource())) {
-            generalComponent.add((mxCell) cell.getSource());
-            sourceComponent.remove(cell.getSource());
-        }
-        if (!generalComponent.contains(cell.getTarget())) {
-            generalComponent.add((mxCell) cell.getTarget());
-            targetComponent.remove(cell.getTarget());
+        if (sourceComponent.size() > targetComponent.size()) {
+            sourceComponent.addAll(targetComponent);
+            targetComponent.clear();
+        } else {
+            targetComponent.addAll(sourceComponent);
+            sourceComponent.clear();
         }
 
         return false;
@@ -244,15 +227,6 @@ public class GraphUtil {
                 return Integer.compare(value1, value2);
             }
         });
-    }
-
-    /** Вывод вершин Графа */
-    private void printGraphList(List<mxICell> graphList) {
-        System.out.println(">> Print Graph List");
-        for (mxICell cell : graphList) {
-            System.out.print(cell.getValue() + "; ");
-        }
-        System.out.println("\n");
     }
 
     /**
