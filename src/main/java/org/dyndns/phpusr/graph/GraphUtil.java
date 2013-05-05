@@ -166,12 +166,14 @@ public class GraphUtil {
                 int lastCost = kruskalTable.size()>0 ? kruskalTable.get(kruskalTable.size() - 1).getCost() : 0;
                 int cost = Integer.parseInt(cell.getValue().toString());
                 kruskal.setCost(lastCost + cost);
-
-                kruskalTable.add(kruskal);
-                System.out.println(kruskal);
-                printComponents(components);
+            } else {
+                kruskal.setUse(false);
             }
+            kruskalTable.add(kruskal);
+            System.out.println(kruskal);
+            printComponents(components);
         }
+        onChange();
     }
 
     /** Образует ли добавление cell цикл */
@@ -273,9 +275,10 @@ public class GraphUtil {
         //Отключение стрелок у Граней
         graph.setCellStyles(mxConstants.STYLE_ENDARROW, mxConstants.NONE, objects);
 
-        //TODO доделать перекрашивание удаляемых ребер или сделать их удаление
         if (kruskalTable != null) {
-            graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, mxUtils.hexString(Color.WHITE), getDelVert());
+            mxCell[] delVert = getDelVert();
+            graph.setCellStyles(mxConstants.STYLE_FONTCOLOR, mxUtils.hexString(Color.LIGHT_GRAY), delVert);
+            graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, mxUtils.hexString(Color.LIGHT_GRAY), delVert);
         }
     }
 
