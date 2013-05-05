@@ -135,7 +135,7 @@ public class GraphUtil {
 
         //Сортируем ребра по весу
         sortList(edges);
-        System.out.print("\t--Edges:");
+        System.out.print("\t--Edges:\t\t");
         for (Object edge : edges) {
             mxCell cell = (mxCell) edge;
             if (edges.indexOf(cell) > 0) System.out.print(",");
@@ -150,27 +150,31 @@ public class GraphUtil {
             cells.add(cell);
             components.add(cells);
         }
+        System.out.print("\t--Componets:\t");
         printComponents(components);
 
         System.out.println(">>Build Graph");
+        int cost = 0;
         for (Object edge : edges) {
             mxCell cell = (mxCell) edge;
             Kruskal kruskal = new Kruskal(cell);
 
-            if (!isCycle(cell, components)) {
+            boolean cykle = isCycle(cell, components);
+            if (!cykle) {
                 kruskal.setUse(true);
-                int lastCost = kruskalTable.size()>0 ? kruskalTable.get(kruskalTable.size() - 1).getCost() : 0;
-                int cost = Integer.parseInt(cell.getValue().toString());
-                kruskal.setCost(lastCost + cost);
+                cost += Integer.parseInt(cell.getValue().toString());
+                kruskal.setCost(cost);
             } else {
                 kruskal.setUse(false);
             }
             kruskalTable.add(kruskal);
-            System.out.println(kruskal);
-            printComponents(components);
+            System.out.print(kruskal);
+
+            if (!cykle) printComponents(components);
+            else System.out.println();
         }
         onChange();
-        System.out.println();
+        System.out.println(">>Min coast: " + cost + "\n");
     }
 
     /** Образует ли добавление cell цикл */
@@ -205,7 +209,6 @@ public class GraphUtil {
 
     /** Вывод Компонент */
     private void printComponents(List<List<mxCell>> components) {
-        System.out.print("\t--Componets:");
         for (List<mxCell> component : components) {
             System.out.print("(");
             for (mxCell cell : component) {
