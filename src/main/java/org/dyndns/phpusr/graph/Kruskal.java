@@ -54,12 +54,11 @@ public class Kruskal {
 
     @Override
     public String toString() {
-        return "::{" +
-                edge.getValue() + ". (" +
-                edge.getSource().getValue() + "-" +
-                edge.getTarget().getValue() + "); " +
-                use + "; " +
-                "C=" + cost +
-                '}';
+        return "" +
+                edge.getValue() + ".\t\t(" +
+                edge.getSource().getValue() + '-' +
+                edge.getTarget().getValue() + ")\t" +
+                (use ? '+' : '-') + '\t' +
+                "C=" + cost + "\t\t";
     }
 }
