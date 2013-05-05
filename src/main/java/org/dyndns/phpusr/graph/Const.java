@@ -24,4 +24,7 @@ public class Const {
     public static final Color FILLCOLOR_DEF = new Color(192, 222, 239);
     public static final Color FONTCOLOR_DEF = Color.BLACK;
 
+    //Стили для Граней
+    public static final Color KRUSKAL_FONT_COLOR = new Color(196, 196, 196);
+    public static final Color KRUSKAL_STROKE_COLOR = new Color(226, 226, 226);
 }

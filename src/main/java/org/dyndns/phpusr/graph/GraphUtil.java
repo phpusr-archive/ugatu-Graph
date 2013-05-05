@@ -110,7 +110,6 @@ public class GraphUtil {
     }
 
     /** Генератор значений для вершин */
-    //TODO сделать возможность ввода значений
     private void generateEdgeValues() {
         List<Object> edges = Arrays.asList(graph.getChildEdges(parent));
 
@@ -156,7 +155,7 @@ public class GraphUtil {
         }
         printComponents(components);
 
-        System.out.println("\n>>Build Graph");
+        System.out.println(">>Build Graph");
         for (Object edge : edges) {
             mxCell cell = (mxCell) edge;
             Kruskal kruskal = new Kruskal(cell);
@@ -174,6 +173,7 @@ public class GraphUtil {
             printComponents(components);
         }
         onChange();
+        System.out.println();
     }
 
     /** Образует ли добавление cell цикл */
@@ -277,8 +277,8 @@ public class GraphUtil {
 
         if (kruskalTable != null) {
             mxCell[] delVert = getDelVert();
-            graph.setCellStyles(mxConstants.STYLE_FONTCOLOR, mxUtils.hexString(Color.LIGHT_GRAY), delVert);
-            graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, mxUtils.hexString(Color.LIGHT_GRAY), delVert);
+            graph.setCellStyles(mxConstants.STYLE_FONTCOLOR, mxUtils.hexString(Const.KRUSKAL_FONT_COLOR), delVert);
+            graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, mxUtils.hexString(Const.KRUSKAL_STROKE_COLOR), delVert);
         }
     }
 
@@ -304,7 +304,7 @@ public class GraphUtil {
             int x = (int) (Math.random() * (Const.FRAME_WIDTH - 2 * Const.VERTEX_WIDTH));
             int y = (int) (Math.random() * (Const.FRAME_HEIGHT - 2 * Const.VERTEX_HEIGHT));
             String title = "" + countVertex++;
-            mxCell cell = new mxCell(title, new mxGeometry(x, y, Const.VERTEX_WIDTH, Const.VERTEX_HEIGHT), "shape=ellipse");
+            mxCell cell = new mxCell(title, new mxGeometry(x, y, Const.VERTEX_WIDTH, Const.VERTEX_HEIGHT), null);
             cell.setVertex(true);
             graph.addCell(cell);
         } finally {
@@ -351,7 +351,7 @@ public class GraphUtil {
         mxGdDocument document = new mxGdDocument();
         document.parse(mxUtils.readFile(file.getAbsolutePath()));
         openGD(file, document);
-        countVertex = 1;
+        countVertex = graph.getChildVertices(parent).length+2;
     }
 
     /** Открывает граф из файла */
