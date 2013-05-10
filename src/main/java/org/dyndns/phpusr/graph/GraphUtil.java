@@ -122,7 +122,7 @@ public class GraphUtil {
     }
 
     /** Алгоритм Крускала */
-    public void kruskal() {
+    public int kruskal() {
         System.out.println(">>Kruskal");
         //Ребра
         List<Object> edges = Arrays.asList(graph.getChildEdges(parent));
@@ -174,7 +174,9 @@ public class GraphUtil {
             else System.out.println();
         }
         onChange();
-        System.out.println(">>Min coast: " + cost + "\n");
+        System.out.println(">>Min cost: " + cost + "\n");
+
+        return cost;
     }
 
     /** Образует ли добавление cell цикл */

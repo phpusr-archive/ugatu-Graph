@@ -15,7 +15,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="b2112" layout-manager="GridLayoutManager" row-count="11" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="b2112" layout-manager="GridLayoutManager" row-count="12" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints border-constraint="West"/>
             <properties/>
@@ -23,7 +23,7 @@
             <children>
               <component id="52515" class="javax.swing.JButton" binding="btnAdd">
                 <constraints>
-                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <icon value="org/dyndns/phpusr/graph/images/add.png"/>
@@ -32,7 +32,7 @@
               </component>
               <component id="52ff9" class="javax.swing.JButton" binding="btnEncode">
                 <constraints>
-                  <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="9" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <icon value="org/dyndns/phpusr/graph/images/encode.gif"/>
@@ -41,7 +41,7 @@
               </component>
               <component id="77b2a" class="javax.swing.JButton" binding="btnExit">
                 <constraints>
-                  <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="11" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <icon value="org/dyndns/phpusr/graph/images/cancel.png"/>
@@ -50,7 +50,7 @@
               </component>
               <component id="7d173" class="javax.swing.JButton" binding="btnNew">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <icon value="org/dyndns/phpusr/graph/images/new.gif"/>
@@ -59,7 +59,7 @@
               </component>
               <component id="5f411" class="javax.swing.JButton" binding="btnOpen">
                 <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <icon value="org/dyndns/phpusr/graph/images/open.gif"/>
@@ -68,7 +68,7 @@
               </component>
               <component id="92c5f" class="javax.swing.JButton" binding="btnSave">
                 <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <icon value="org/dyndns/phpusr/graph/images/save.gif"/>
@@ -77,13 +77,13 @@
               </component>
               <component id="7f560" class="javax.swing.JSeparator">
                 <constraints>
-                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
               </component>
               <component id="8259e" class="javax.swing.JButton" binding="btnDelete">
                 <constraints>
-                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <icon value="org/dyndns/phpusr/graph/images/delete.gif"/>
@@ -92,13 +92,13 @@
               </component>
               <component id="b0c0" class="javax.swing.JSeparator">
                 <constraints>
-                  <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="8" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
               </component>
               <component id="8bf1f" class="javax.swing.JButton" binding="btnAbout">
                 <constraints>
-                  <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="10" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <icon value="org/dyndns/phpusr/graph/images/actor.png"/>
@@ -107,11 +107,29 @@
               </component>
               <component id="f43fb" class="javax.swing.JButton" binding="btnKruskal">
                 <constraints>
-                  <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <font name="Tahoma" size="11" style="1"/>
                   <text value="Алгоритм Крускала"/>
+                </properties>
+              </component>
+              <component id="9aecb" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Verdana" size="11" style="1"/>
+                  <text value="Стоимость:"/>
+                </properties>
+              </component>
+              <component id="1a57c" class="javax.swing.JLabel" binding="lblCost">
+                <constraints>
+                  <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Verdana" size="11"/>
+                  <text value="100"/>
                 </properties>
               </component>
             </children>

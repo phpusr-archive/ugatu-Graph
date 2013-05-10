@@ -30,14 +30,17 @@ public class GraphForm {
     private JButton btnDelete;
     private JButton btnAbout;
     private JButton btnKruskal;
+    private JLabel lblCost;
     private GraphUtil util;
 
     public GraphForm(GraphUtil graphUtil) {
         this.util = graphUtil;
         localizeForm();
+        lblCost.setText("");
 
         btnAdd.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                lblCost.setText("");
                 util.addVertex();
             }
         });
@@ -91,6 +94,7 @@ public class GraphForm {
         });
         btnOpen.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                lblCost.setText("");
                 JFileChooser fc = new JFileChooser();
                 fc.addChoosableFileFilter(new DefaultFileFilter(Const.EXT_DEF,
                         Const.CHOOSE_FILE_FILTER_DESCRIP));
@@ -114,12 +118,14 @@ public class GraphForm {
             public void actionPerformed(ActionEvent e) {
                 if (JOptionPane.showConfirmDialog(util.getGraphComponent(),
                         mxResources.get("loseChanges")) == JOptionPane.YES_OPTION) {
+                    lblCost.setText("");
                     util.clear();
                 }
             }
         });
         btnDelete.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                lblCost.setText("");
                 util.deleteCell();
             }
         });
@@ -135,7 +141,7 @@ public class GraphForm {
         });
         btnKruskal.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                util.kruskal();
+                lblCost.setText(""+util.kruskal());
             }
         });
     }
